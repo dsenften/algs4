@@ -475,6 +475,7 @@ import javax.swing.KeyStroke;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+@SuppressWarnings({"SuspiciousNameCombination", "DuplicatedCode"})
 public final class StdDraw implements ActionListener, MouseListener, MouseMotionListener, KeyListener {
 
     /**
@@ -597,8 +598,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     private static double xmin, ymin, xmax, ymax;
 
     // for synchronization
-    private static Object mouseLock = new Object();
-    private static Object keyLock = new Object();
+    private static final Object mouseLock = new Object();
+    private static final Object keyLock = new Object();
 
     // default font
     private static final Font DEFAULT_FONT = new Font("SansSerif", Font.PLAIN, 16);
@@ -611,7 +612,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     private static Graphics2D offscreen, onscreen;
 
     // singleton for callbacks: avoids generation of extra .class files
-    private static StdDraw std = new StdDraw();
+    private static final StdDraw std = new StdDraw();
 
     // the frame for drawing to the screen
     private static JFrame frame;
@@ -622,10 +623,10 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     private static double mouseY = 0;
 
     // queue of typed key characters
-    private static LinkedList<Character> keysTyped = new LinkedList<Character>();
+    private static final LinkedList<Character> keysTyped = new LinkedList<>();
 
     // set of key codes currently pressed down
-    private static TreeSet<Integer> keysDown = new TreeSet<Integer>();
+    private static final TreeSet<Integer> keysDown = new TreeSet<>();
 
     // singleton pattern: client can't instantiate
     private StdDraw() { }
@@ -977,9 +978,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
 
-   /***************************************************************************
+   /*
     *  Drawing geometric shapes.
-    ***************************************************************************/
+    */
 
     /**
      * Draws a line segment between (<em>x</em><sub>0</sub>, <em>y</em><sub>0</sub>) and
@@ -1392,13 +1393,13 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
         return icon.getImage();
     }
 
-   /***************************************************************************
+   /*
     * [Summer 2016] Should we update to use ImageIO instead of ImageIcon()?
     *               Seems to have some issues loading images on some systems
     *               and slows things down on other systems.
     *               especially if you don't call ImageIO.setUseCache(false)
     *               One advantage is that it returns a BufferedImage.
-    ***************************************************************************/
+    */
 /*
     private static BufferedImage getImage(String filename) {
         if (filename == null) throw new IllegalArgumentException();
@@ -1589,9 +1590,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
         draw();
     }
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Drawing text.
-    ***************************************************************************/
+    * **************************************************************************/
 
     /**
      * Writes the given text string in the current font, centered at (<em>x</em>, <em>y</em>).
@@ -1751,9 +1752,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Save drawing to a file.
-    ***************************************************************************/
+    * **************************************************************************/
 
     /**
      * Saves the drawing to using the specified filename.
@@ -1818,9 +1819,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Mouse interactions.
-    ***************************************************************************/
+    * **************************************************************************/
 
     /**
      * Returns true if the mouse is being pressed.
@@ -1938,9 +1939,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Keyboard interactions.
-    ***************************************************************************/
+    * **************************************************************************/
 
     /**
      * Returns true if the user has typed a key (that has not yet been processed).

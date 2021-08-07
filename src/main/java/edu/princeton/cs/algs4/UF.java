@@ -82,8 +82,8 @@ package edu.princeton.cs.algs4;
 
 public class UF {
 
-    private int[] parent;  // parent[i] = parent of i
-    private byte[] rank;   // rank[i] = rank of subtree rooted at i (never more than 31)
+    private final int[] parent;  // parent[i] = parent of i
+    private final byte[] rank;   // rank[i] = rank of subtree rooted at i (never more than 31)
     private int count;     // number of components
 
     /**

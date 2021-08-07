@@ -71,7 +71,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     private Node root;             // root of BST
 
     private class Node {
-        private Key key;           // sorted by key
+        private final Key key;           // sorted by key
         private Value val;         // associated data
         private Node left, right;  // left and right subtrees
         private int size;          // number of nodes in subtree
@@ -402,7 +402,7 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return all keys in the symbol table
      */
     public Iterable<Key> keys() {
-        if (isEmpty()) return new Queue<Key>();
+        if (isEmpty()) return new Queue<>();
         return keys(min(), max());
     }
 
@@ -421,7 +421,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
         if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
 
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         keys(root, queue, lo, hi);
         return queue;
     } 
@@ -473,8 +473,8 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return the keys in the BST in level order traversal
      */
     public Iterable<Key> levelOrder() {
-        Queue<Key> keys = new Queue<Key>();
-        Queue<Node> queue = new Queue<Node>();
+        Queue<Key> keys = new Queue<>();
+        Queue<Node> queue = new Queue<>();
         queue.enqueue(root);
         while (!queue.isEmpty()) {
             Node x = queue.dequeue();
@@ -536,7 +536,7 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) { 
-        BST<String, Integer> st = new BST<String, Integer>();
+        BST<String, Integer> st = new BST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);

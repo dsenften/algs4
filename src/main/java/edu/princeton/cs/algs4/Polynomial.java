@@ -37,7 +37,7 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class Polynomial {
-    private int[] coef;   // coefficients p(x) = sum { coef[i] * x^i }
+    private final int[] coef;   // coefficients p(x) = sum { coef[i] * x^i }
     private int degree;   // degree of polynomial (-1 for the zero polynomial)
 
     /**

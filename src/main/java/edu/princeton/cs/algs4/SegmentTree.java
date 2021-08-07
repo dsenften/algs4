@@ -33,9 +33,9 @@ import java.util.Arrays;
  */
 public class SegmentTree {
 
-    private Node[] heap;
-    private int[] array;
-    private int size;
+    private final Node[] heap;
+    private final int[] array;
+    private final int size;
 
     /**
      * Time-Complexity:  O(n*log(n))
@@ -45,7 +45,7 @@ public class SegmentTree {
     public SegmentTree(int[] array) {
         this.array = Arrays.copyOf(array, array.length);
         //The max size of this array is about 2 * 2 ^ log2(n) + 1
-        size = (int) (2 * Math.pow(2.0, Math.floor((Math.log((double) array.length) / Math.log(2.0)) + 1)));
+        size = (int) (2 * Math.pow(2.0, Math.floor((Math.log(array.length) / Math.log(2.0)) + 1)));
         heap = new Node[size];
         build(1, 0, array.length);
     }
@@ -171,7 +171,7 @@ public class SegmentTree {
         //The Node of the heap tree represents a range of the array with bounds: [n.from, n.to]
         Node n = heap[v];
 
-        /**
+        /*
          * If the updating-range contains the portion of the current Node  We lazily update it.
          * This means We do NOT update each position of the vector, but update only some temporal
          * values into the Node; such values into the Node will be propagated down to its children only when they need to.
@@ -183,7 +183,7 @@ public class SegmentTree {
         if (n.size() == 1) return;
 
         if (intersects(from, to, n.from, n.to)) {
-            /**
+            /*
              * Before keeping going down to the tree We need to propagate the
              * the values that have been temporally/lazily saved into this Node to its children
              * So that when We visit them the values  are properly updated
@@ -292,7 +292,7 @@ public class SegmentTree {
                 StdOut.println("Segment Tree not initialized");
                 continue;
             }
-            int array[];
+            int[] array;
             if (line[0].equals("set")) {
                 array = new int[line.length - 1];
                 for (int i = 0; i < line.length - 1; i++) {

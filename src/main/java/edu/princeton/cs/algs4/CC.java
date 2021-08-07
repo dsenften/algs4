@@ -61,9 +61,9 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class CC {
-    private boolean[] marked;   // marked[v] = has vertex v been marked?
-    private int[] id;           // id[v] = id of connected component containing v
-    private int[] size;         // size[id] = number of vertices in given component
+    private final boolean[] marked;   // marked[v] = has vertex v been marked?
+    private final int[] id;           // id[v] = id of connected component containing v
+    private final int[] size;         // size[id] = number of vertices in given component
     private int count;          // number of connected components
 
     /**
@@ -219,7 +219,7 @@ public class CC {
         // compute list of vertices in each connected component
         Queue<Integer>[] components = (Queue<Integer>[]) new Queue[m];
         for (int i = 0; i < m; i++) {
-            components[i] = new Queue<Integer>();
+            components[i] = new Queue<>();
         }
         for (int v = 0; v < G.V(); v++) {
             components[cc.id(v)].enqueue(v);

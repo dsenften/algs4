@@ -57,10 +57,10 @@ public class BellmanFordSP {
     // for floating-point precision issues
     private static final double EPSILON = 1E-14;
 
-    private double[] distTo;               // distTo[v] = distance  of shortest s->v path
-    private DirectedEdge[] edgeTo;         // edgeTo[v] = last edge on shortest s->v path
-    private boolean[] onQueue;             // onQueue[v] = is v currently on the queue?
-    private Queue<Integer> queue;          // queue of vertices to relax
+    private final double[] distTo;               // distTo[v] = distance  of shortest s->v path
+    private final DirectedEdge[] edgeTo;         // edgeTo[v] = last edge on shortest s->v path
+    private final boolean[] onQueue;             // onQueue[v] = is v currently on the queue?
+    private final Queue<Integer> queue;          // queue of vertices to relax
     private int cost;                      // number of calls to relax()
     private Iterable<DirectedEdge> cycle;  // negative cycle (or null if no such cycle)
 
@@ -80,7 +80,7 @@ public class BellmanFordSP {
         distTo[s] = 0.0;
 
         // Bellman-Ford algorithm
-        queue = new Queue<Integer>();
+        queue = new Queue<>();
         queue.enqueue(s);
         onQueue[s] = true;
         while (!queue.isEmpty() && !hasNegativeCycle()) {
@@ -134,9 +134,9 @@ public class BellmanFordSP {
     private void findNegativeCycle() {
         int V = edgeTo.length;
         EdgeWeightedDigraph spt = new EdgeWeightedDigraph(V);
-        for (int v = 0; v < V; v++)
-            if (edgeTo[v] != null)
-                spt.addEdge(edgeTo[v]);
+        for (DirectedEdge directedEdge : edgeTo)
+            if (directedEdge != null)
+                spt.addEdge(directedEdge);
 
         EdgeWeightedDirectedCycle finder = new EdgeWeightedDirectedCycle(spt);
         cycle = finder.cycle();
@@ -184,7 +184,7 @@ public class BellmanFordSP {
         if (hasNegativeCycle())
             throw new UnsupportedOperationException("Negative cost cycle exists");
         if (!hasPathTo(v)) return null;
-        Stack<DirectedEdge> path = new Stack<DirectedEdge>();
+        Stack<DirectedEdge> path = new Stack<>();
         for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
             path.push(e);
         }

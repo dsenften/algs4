@@ -85,7 +85,7 @@ import javax.swing.KeyStroke;
  *  @author Kevin Wayne
  */
 public final class Picture implements ActionListener {
-    private BufferedImage image;               // the rasterized image
+    private final BufferedImage image;               // the rasterized image
     private JFrame frame;                      // on-screen view
     private String filename;                   // name of file
     private boolean isOriginUpperLeft = true;  // location of origin

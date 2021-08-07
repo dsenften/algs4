@@ -247,7 +247,7 @@ public final class StdAudio {
             double[] data = new double[n/2];
             for (int i = 0; i < n/2; i++) {
                 // little endian, mono
-                data[i] = ((short) (((bytes[2*i+1] & 0xFF) << 8) | (bytes[2*i] & 0xFF))) / ((double) MAX_16_BIT);
+                data[i] = ((short) (((bytes[2*i+1] & 0xFF) << 8) | (bytes[2*i] & 0xFF))) / MAX_16_BIT;
             }
             return data;
         }
@@ -256,8 +256,8 @@ public final class StdAudio {
         else if (audioFormat.getChannels() == STEREO) {
             double[] data = new double[n/4];
             for (int i = 0; i < n/4; i++) {
-                double left  = ((short) (((bytes[4*i+1] & 0xFF) << 8) | (bytes[4*i + 0] & 0xFF))) / ((double) MAX_16_BIT);
-                double right = ((short) (((bytes[4*i+3] & 0xFF) << 8) | (bytes[4*i + 2] & 0xFF))) / ((double) MAX_16_BIT);
+                double left  = ((short) (((bytes[4*i+1] & 0xFF) << 8) | (bytes[4*i + 0] & 0xFF))) / MAX_16_BIT;
+                double right = ((short) (((bytes[4*i+3] & 0xFF) << 8) | (bytes[4*i + 2] & 0xFF))) / MAX_16_BIT;
                 data[i] = (left + right) / 2.0;
             }
             return data;
@@ -423,11 +423,6 @@ public final class StdAudio {
         return a;
     }
 
-    /**
-     * Test client - play an A major scale to standard audio.
-     *
-     * @param args the command-line arguments
-     */
     /**
      * Test client - play an A major scale to standard audio.
      *

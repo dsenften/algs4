@@ -86,8 +86,7 @@ public class Date implements Comparable<Date> {
     private static boolean isValid(int m, int d, int y) {
         if (m < 1 || m > 12)      return false;
         if (d < 1 || d > DAYS[m]) return false;
-        if (m == 2 && d == 29 && !isLeapYear(y)) return false;
-        return true;
+        return m != 2 || d != 29 || isLeapYear(y);
     }
 
     // is y a leap year?

@@ -54,7 +54,7 @@ package edu.princeton.cs.algs4;
 public class BoruvkaMST {
     private static final double FLOATING_POINT_EPSILON = 1E-12;
 
-    private Bag<Edge> mst = new Bag<Edge>();    // edges in MST
+    private final Bag<Edge> mst = new Bag<>();    // edges in MST
     private double weight;                      // weight of MST
 
     /**

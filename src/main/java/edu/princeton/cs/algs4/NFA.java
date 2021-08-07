@@ -56,8 +56,8 @@ package edu.princeton.cs.algs4;
  */
 public class NFA { 
 
-    private Digraph graph;     // digraph of epsilon transitions
-    private String regexp;     // regular expression
+    private final Digraph graph;     // digraph of epsilon transitions
+    private final String regexp;     // regular expression
     private final int m;       // number of characters in regular expression
 
     /**
@@ -68,7 +68,7 @@ public class NFA {
     public NFA(String regexp) {
         this.regexp = regexp;
         m = regexp.length();
-        Stack<Integer> ops = new Stack<Integer>(); 
+        Stack<Integer> ops = new Stack<>();
         graph = new Digraph(m+1); 
         for (int i = 0; i < m; i++) { 
             int lp = i; 
@@ -109,7 +109,7 @@ public class NFA {
      */
     public boolean recognizes(String txt) {
         DirectedDFS dfs = new DirectedDFS(graph, 0);
-        Bag<Integer> pc = new Bag<Integer>();
+        Bag<Integer> pc = new Bag<>();
         for (int v = 0; v < graph.V(); v++)
             if (dfs.marked(v)) pc.add(v);
 
@@ -118,14 +118,14 @@ public class NFA {
             if (txt.charAt(i) == '*' || txt.charAt(i) == '|' || txt.charAt(i) == '(' || txt.charAt(i) == ')')
                 throw new IllegalArgumentException("text contains the metacharacter '" + txt.charAt(i) + "'");
 
-            Bag<Integer> match = new Bag<Integer>();
+            Bag<Integer> match = new Bag<>();
             for (int v : pc) {
                 if (v == m) continue;
                 if ((regexp.charAt(v) == txt.charAt(i)) || regexp.charAt(v) == '.')
                     match.add(v+1); 
             }
             dfs = new DirectedDFS(graph, match); 
-            pc = new Bag<Integer>();
+            pc = new Bag<>();
             for (int v = 0; v < graph.V(); v++)
                 if (dfs.marked(v)) pc.add(v);
 

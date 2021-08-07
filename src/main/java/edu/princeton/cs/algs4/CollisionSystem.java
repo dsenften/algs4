@@ -35,9 +35,9 @@ import java.awt.Color;
 public class CollisionSystem {
     private static final double HZ = 0.5;    // number of redraw events per clock tick
 
-    private MinPQ<Event> pq;          // the priority queue
-    private double t  = 0.0;          // simulation clock time
-    private Particle[] particles;     // the array of particles
+    private MinPQ<Event> pq;            // the priority queue
+    private double t  = 0.0;            // simulation clock time
+    private final Particle[] particles; // the array of particles
 
     /**
      * Initializes a system with the specified collection of particles.
@@ -54,10 +54,10 @@ public class CollisionSystem {
         if (a == null) return;
 
         // particle-particle collisions
-        for (int i = 0; i < particles.length; i++) {
-            double dt = a.timeToHit(particles[i]);
+        for (Particle particle : particles) {
+            double dt = a.timeToHit(particle);
             if (t + dt <= limit)
-                pq.insert(new Event(t + dt, a, particles[i]));
+                pq.insert(new Event(t + dt, a, particle));
         }
 
         // particle-wall collisions
@@ -70,8 +70,8 @@ public class CollisionSystem {
     // redraw all particles
     private void redraw(double limit) {
         StdDraw.clear();
-        for (int i = 0; i < particles.length; i++) {
-            particles[i].draw();
+        for (Particle particle : particles) {
+            particle.draw();
         }
         StdDraw.show();
         StdDraw.pause(20);
@@ -86,12 +86,13 @@ public class CollisionSystem {
      *
      * @param  limit the amount of time
      */
+    @SuppressWarnings("ConstantConditions")
     public void simulate(double limit) {
         
         // initialize PQ with collision events and redraw event
-        pq = new MinPQ<Event>();
-        for (int i = 0; i < particles.length; i++) {
-            predict(particles[i], limit);
+        pq = new MinPQ<>();
+        for (Particle particle : particles) {
+            predict(particle, limit);
         }
         pq.insert(new Event(0, null, null));        // redraw event
 
@@ -106,8 +107,7 @@ public class CollisionSystem {
             Particle b = e.b;
 
             // physical collision, so update positions, and then simulation clock
-            for (int i = 0; i < particles.length; i++)
-                particles[i].move(e.time - t);
+            for (Particle particle : particles) particle.move(e.time - t);
             t = e.time;
 
             // process event
@@ -159,8 +159,7 @@ public class CollisionSystem {
         // has any collision occurred between when event was created and now?
         public boolean isValid() {
             if (a != null && a.count() != countA) return false;
-            if (b != null && b.count() != countB) return false;
-            return true;
+            return b == null || b.count() == countB;
         }
    
     }

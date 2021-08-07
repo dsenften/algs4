@@ -250,9 +250,9 @@ public class MaxPQ<Key> implements Iterable<Key> {
     }
 
 
-   /***************************************************************************
+   /* **************************************************************************
     * Iterator.
-    ***************************************************************************/
+    * **************************************************************************/
 
     /**
      * Returns an iterator that iterates over the keys on this priority queue
@@ -268,13 +268,13 @@ public class MaxPQ<Key> implements Iterable<Key> {
     private class HeapIterator implements Iterator<Key> {
 
         // create a new pq
-        private MaxPQ<Key> copy;
+        private final MaxPQ<Key> copy;
 
         // add all items to copy of heap
         // takes linear time since already in heap order so no keys move
         public HeapIterator() {
-            if (comparator == null) copy = new MaxPQ<Key>(size());
-            else                    copy = new MaxPQ<Key>(size(), comparator);
+            if (comparator == null) copy = new MaxPQ<>(size());
+            else                    copy = new MaxPQ<>(size(), comparator);
             for (int i = 1; i <= n; i++)
                 copy.insert(pq[i]);
         }
@@ -294,7 +294,7 @@ public class MaxPQ<Key> implements Iterable<Key> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        MaxPQ<String> pq = new MaxPQ<String>();
+        MaxPQ<String> pq = new MaxPQ<>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
             if (!item.equals("-")) pq.insert(item);

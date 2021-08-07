@@ -54,12 +54,12 @@ package edu.princeton.cs.algs4;
  */
 public class TarjanSCC {
 
-    private boolean[] marked;        // marked[v] = has v been visited?
-    private int[] id;                // id[v] = id of strong component containing v
-    private int[] low;               // low[v] = low number of v
+    private final boolean[] marked;        // marked[v] = has v been visited?
+    private final int[] id;                // id[v] = id of strong component containing v
+    private final int[] low;               // low[v] = low number of v
     private int pre;                 // preorder number counter
     private int count;               // number of strongly-connected components
-    private Stack<Integer> stack;
+    private final Stack<Integer> stack;
 
 
     /**
@@ -68,7 +68,7 @@ public class TarjanSCC {
      */
     public TarjanSCC(Digraph G) {
         marked = new boolean[G.V()];
-        stack = new Stack<Integer>();
+        stack = new Stack<>();
         id = new int[G.V()]; 
         low = new int[G.V()];
         for (int v = 0; v < G.V(); v++) {
@@ -173,7 +173,7 @@ public class TarjanSCC {
         // compute list of vertices in each strong component
         Queue<Integer>[] components = (Queue<Integer>[]) new Queue[m];
         for (int i = 0; i < m; i++) {
-            components[i] = new Queue<Integer>();
+            components[i] = new Queue<>();
         }
         for (int v = 0; v < G.V(); v++) {
             components[scc.id(v)].enqueue(v);

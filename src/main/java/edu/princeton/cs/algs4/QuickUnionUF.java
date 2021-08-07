@@ -62,7 +62,7 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class QuickUnionUF {
-    private int[] parent;  // parent[i] = parent of i
+    private final int[] parent;  // parent[i] = parent of i
     private int count;     // number of components
 
     /**

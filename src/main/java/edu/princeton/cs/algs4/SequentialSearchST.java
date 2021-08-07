@@ -64,7 +64,7 @@ public class SequentialSearchST<Key, Value> {
 
     // a helper linked list data type
     private class Node {
-        private Key key;
+        private final Key key;
         private Value val;
         private Node next;
 
@@ -190,7 +190,7 @@ public class SequentialSearchST<Key, Value> {
      * @return all keys in the symbol table
      */
     public Iterable<Key> keys()  {
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         for (Node x = first; x != null; x = x.next)
             queue.enqueue(x.key);
         return queue;
@@ -203,7 +203,7 @@ public class SequentialSearchST<Key, Value> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        SequentialSearchST<String, Integer> st = new SequentialSearchST<String, Integer>();
+        SequentialSearchST<String, Integer> st = new SequentialSearchST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);

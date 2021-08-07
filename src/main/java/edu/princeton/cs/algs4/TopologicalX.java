@@ -39,7 +39,7 @@ package edu.princeton.cs.algs4;
  */
 public class TopologicalX {
     private Queue<Integer> order;     // vertices in topological order
-    private int[] ranks;              // ranks[v] = order where vertex v appers in order
+    private final int[] ranks;              // ranks[v] = order where vertex v appers in order
 
     /**
      * Determines whether the digraph {@code G} has a topological order and, if so,
@@ -56,11 +56,11 @@ public class TopologicalX {
 
         // initialize 
         ranks = new int[G.V()]; 
-        order = new Queue<Integer>();
+        order = new Queue<>();
         int count = 0;
 
         // initialize queue to contain all vertices with indegree = 0
-        Queue<Integer> queue = new Queue<Integer>();
+        Queue<Integer> queue = new Queue<>();
         for (int v = 0; v < G.V(); v++)
             if (indegree[v] == 0) queue.enqueue(v);
 
@@ -97,11 +97,11 @@ public class TopologicalX {
 
         // initialize 
         ranks = new int[G.V()]; 
-        order = new Queue<Integer>();
+        order = new Queue<>();
         int count = 0;
 
         // initialize queue to contain all vertices with indegree = 0
-        Queue<Integer> queue = new Queue<Integer>();
+        Queue<Integer> queue = new Queue<>();
         for (int v = 0; v < G.V(); v++)
             if (indegree[v] == 0) queue.enqueue(v);
 

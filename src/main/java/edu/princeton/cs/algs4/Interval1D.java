@@ -122,8 +122,7 @@ public class Interval1D {
      */
     public boolean intersects(Interval1D that) {
         if (this.max < that.min) return false;
-        if (that.max < this.min) return false;
-        return true;
+        return !(that.max < this.min);
     }
 
     /**

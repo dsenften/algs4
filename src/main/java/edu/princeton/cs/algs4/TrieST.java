@@ -47,6 +47,7 @@ package edu.princeton.cs.algs4;
  *  For additional documentation, see <a href="https://algs4.cs.princeton.edu/52trie">Section 5.2</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  */
+@SuppressWarnings("DuplicatedCode")
 public class TrieST<Value> {
     private static final int R = 256;        // extended ASCII
 
@@ -57,7 +58,7 @@ public class TrieST<Value> {
     // R-way trie node
     private static class Node {
         private Object val;
-        private Node[] next = new Node[R];
+        private final Node[] next = new Node[R];
     }
 
    /**
@@ -159,7 +160,7 @@ public class TrieST<Value> {
      *     as an iterable
      */
     public Iterable<String> keysWithPrefix(String prefix) {
-        Queue<String> results = new Queue<String>();
+        Queue<String> results = new Queue<>();
         Node x = get(root, prefix, 0);
         collect(x, new StringBuilder(prefix), results);
         return results;
@@ -183,7 +184,7 @@ public class TrieST<Value> {
      *     as an iterable, where . is treated as a wildcard character.
      */
     public Iterable<String> keysThatMatch(String pattern) {
-        Queue<String> results = new Queue<String>();
+        Queue<String> results = new Queue<>();
         collect(root, new StringBuilder(), pattern, results);
         return results;
     }
@@ -274,7 +275,7 @@ public class TrieST<Value> {
     public static void main(String[] args) {
 
         // build symbol table from standard input
-        TrieST<Integer> st = new TrieST<Integer>();
+        TrieST<Integer> st = new TrieST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);

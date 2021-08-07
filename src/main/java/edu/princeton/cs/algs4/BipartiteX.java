@@ -42,9 +42,9 @@ public class BipartiteX {
     private static final boolean BLACK = true;
 
     private boolean isBipartite;   // is the graph bipartite?
-    private boolean[] color;       // color[v] gives vertices on one side of bipartition
-    private boolean[] marked;      // marked[v] = true iff v has been visited in DFS
-    private int[] edgeTo;          // edgeTo[v] = last edge on path to v
+    private final boolean[] color;       // color[v] gives vertices on one side of bipartition
+    private final boolean[] marked;      // marked[v] = true iff v has been visited in DFS
+    private final int[] edgeTo;          // edgeTo[v] = last edge on path to v
     private Queue<Integer> cycle;  // odd-length cycle
 
     /**
@@ -68,7 +68,7 @@ public class BipartiteX {
     }
 
     private void bfs(Graph G, int s) { 
-        Queue<Integer> q = new Queue<Integer>();
+        Queue<Integer> q = new Queue<>();
         color[s] = WHITE;
         marked[s] = true;
         q.enqueue(s);
@@ -89,8 +89,8 @@ public class BipartiteX {
                     // and let x be closest node to v and w common to two paths
                     // then (w-x path) + (x-v path) + (edge v-w) is an odd-length cycle
                     // Note: distTo[v] == distTo[w];
-                    cycle = new Queue<Integer>();
-                    Stack<Integer> stack = new Stack<Integer>();
+                    cycle = new Queue<>();
+                    Stack<Integer> stack = new Stack<>();
                     int x = v, y = w;
                     while (x != y) {
                         stack.push(x);

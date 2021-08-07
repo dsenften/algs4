@@ -50,8 +50,8 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class DepthFirstDirectedPaths {
-    private boolean[] marked;  // marked[v] = true iff v is reachable from s
-    private int[] edgeTo;      // edgeTo[v] = last edge on path from s to v
+    private final boolean[] marked;  // marked[v] = true iff v is reachable from s
+    private final int[] edgeTo;      // edgeTo[v] = last edge on path from s to v
     private final int s;       // source vertex
 
     /**
@@ -102,7 +102,7 @@ public class DepthFirstDirectedPaths {
     public Iterable<Integer> pathTo(int v) {
         validateVertex(v);
         if (!hasPathTo(v)) return null;
-        Stack<Integer> path = new Stack<Integer>();
+        Stack<Integer> path = new Stack<>();
         for (int x = v; x != s; x = edgeTo[x])
             path.push(x);
         path.push(s);

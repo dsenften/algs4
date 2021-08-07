@@ -41,9 +41,9 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class SymbolDigraph {
-    private ST<String, Integer> st;  // string -> index
-    private String[] keys;           // index  -> string
-    private Digraph graph;           // the underlying digraph
+    private final ST<String, Integer> st;  // string -> index
+    private final String[] keys;           // index  -> string
+    private final Digraph graph;           // the underlying digraph
 
     /**  
      * Initializes a digraph from a file using the specified delimiter.
@@ -54,16 +54,16 @@ public class SymbolDigraph {
      * @param delimiter the delimiter between fields
      */
     public SymbolDigraph(String filename, String delimiter) {
-        st = new ST<String, Integer>();
+        st = new ST<>();
 
         // First pass builds the index by reading strings to associate
         // distinct strings with an index
         In in = new In(filename);
         while (in.hasNextLine()) {
             String[] a = in.readLine().split(delimiter);
-            for (int i = 0; i < a.length; i++) {
-                if (!st.contains(a[i]))
-                    st.put(a[i], st.size());
+            for (String s : a) {
+                if (!st.contains(s))
+                    st.put(s, st.size());
             }
         }
 

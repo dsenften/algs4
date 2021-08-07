@@ -78,8 +78,8 @@ public class Alphabet {
     public static final Alphabet UNICODE16      = new Alphabet(65536);
 
 
-    private char[] alphabet;     // the characters in the alphabet
-    private int[] inverse;       // indices
+    private final char[] alphabet;     // the characters in the alphabet
+    private final int[] inverse;       // indices
     private final int R;         // the radix of the alphabet
 
     /**
@@ -230,8 +230,7 @@ public class Alphabet {
      */
     public String toChars(int[] indices) {
         StringBuilder s = new StringBuilder(indices.length);
-        for (int i = 0; i < indices.length; i++)
-            s.append(toChar(indices[i]));
+        for (int index : indices) s.append(toChar(index));
         return s.toString();
     }
 

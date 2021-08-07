@@ -1,4 +1,4 @@
-/******************************************************************************
+/* *****************************************************************************
  *  Compilation:  javac LinkedStack.java
  *  Execution:    java LinkedStack < input.txt
  *  Dependencies: StdIn.java StdOut.java
@@ -13,7 +13,7 @@
  *  % java LinkedStack < tobe.txt
  *  to be not that or be (2 left on stack)
  *
- ******************************************************************************/
+ * *****************************************************************************/
 
 package edu.princeton.cs.algs4;
 
@@ -171,9 +171,7 @@ public class LinkedStack<Item> implements Iterable<Item> {
         for (Node x = first; x != null && numberOfNodes <= n; x = x.next) {
             numberOfNodes++;
         }
-        if (numberOfNodes != n) return false;
-
-        return true;
+        return numberOfNodes == n;
     }
 
     /**

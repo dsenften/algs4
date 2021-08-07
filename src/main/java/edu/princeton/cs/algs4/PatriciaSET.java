@@ -91,7 +91,7 @@ import java.util.Iterator;
  *  @author John Hentosh (based on an implementation by Robert Sedgewick)
  */
 public class PatriciaSET implements Iterable<String> {
-    private Node head;
+    private final Node head;
     private int count;
 
     /* An inner Node class specifies the objects that hold each key. The b
@@ -99,14 +99,14 @@ public class PatriciaSET implements Iterable<String> {
      */
     private class Node {
         private Node left, right;
-        private String key;
+        private final String key;
         private int b;
 
         public Node(String key, int b) {
             this.key = key;
             this.b = b;
         }
-    };
+    }
 
     /**
      * Initializes an empty PATRICIA-based set.
@@ -254,7 +254,7 @@ public class PatriciaSET implements Iterable<String> {
      * @return an iterator to all of the keys in the set
      */
     public Iterator<String> iterator() {
-        Queue<String> queue = new Queue<String>();
+        Queue<String> queue = new Queue<>();
         if (head.left  != head) collect(head.left,  0, queue);
         if (head.right != head) collect(head.right, 0, queue);
         return queue.iterator();
@@ -297,8 +297,8 @@ public class PatriciaSET implements Iterable<String> {
      */
     private static boolean safeBitTest(String key, int b) {
         if (b < key.length() * 16)      return bitTest(key, b) != 0;
-        if (b > key.length() * 16 + 15) return false;   // padding
-        /* 16 bits of 0xffff */         return true;    // end marker
+        return b <= key.length() * 16 + 15;   // padding
+        /* 16 bits of 0xffff */// end marker
     }
 
     private static int bitTest(String key, int b) {

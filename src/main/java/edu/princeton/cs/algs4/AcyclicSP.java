@@ -40,9 +40,10 @@ package edu.princeton.cs.algs4;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+@SuppressWarnings("DuplicatedCode")
 public class AcyclicSP {
-    private double[] distTo;         // distTo[v] = distance  of shortest s->v path
-    private DirectedEdge[] edgeTo;   // edgeTo[v] = last edge on shortest s->v path
+    private final double[] distTo;         // distTo[v] = distance  of shortest s->v path
+    private final DirectedEdge[] edgeTo;   // edgeTo[v] = last edge on shortest s->v path
 
 
     /**
@@ -116,7 +117,7 @@ public class AcyclicSP {
     public Iterable<DirectedEdge> pathTo(int v) {
         validateVertex(v);
         if (!hasPathTo(v)) return null;
-        Stack<DirectedEdge> path = new Stack<DirectedEdge>();
+        Stack<DirectedEdge> path = new Stack<>();
         for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
             path.push(e);
         }

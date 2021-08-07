@@ -94,7 +94,7 @@ package edu.princeton.cs.algs4;
  *  @author John Hentosh (based on an implementation by Robert Sedgewick)
  */
 public class PatriciaST<Value> {
-    private Node head;
+    private final Node head;
     private int count;
 
     /* An inner Node class specifies the objects that hold each key-value pair.
@@ -102,7 +102,7 @@ public class PatriciaST<Value> {
      */
     private class Node {
         private Node left, right;
-        private String key;
+        private final String key;
         private Value val;
         private int b;
 
@@ -111,7 +111,7 @@ public class PatriciaST<Value> {
             this.val = val;
             this.b = b;
         }
-    };
+    }
 
     /**
      * Initializes an empty PATRICIA-based symbol table.
@@ -281,7 +281,7 @@ public class PatriciaST<Value> {
      * @return all keys in the symbol table as an {@code Iterable}
      */
     public Iterable<String> keys() {
-        Queue<String> queue = new Queue<String>();
+        Queue<String> queue = new Queue<>();
         if (head.left  != head) keys(head.left,  0, queue);
         if (head.right != head) keys(head.right, 0, queue);
         return queue;
@@ -312,8 +312,8 @@ public class PatriciaST<Value> {
      */
     private static boolean safeBitTest(String key, int b) {
         if (b < key.length() * 16)      return bitTest(key, b) != 0;
-        if (b > key.length() * 16 + 15) return false;   // padding
-        /* 16 bits of 0xffff */         return true;    // end marker
+        return b <= key.length() * 16 + 15;   // padding
+        /* 16 bits of 0xffff */// end marker
     }
 
     private static int bitTest(String key, int b) {

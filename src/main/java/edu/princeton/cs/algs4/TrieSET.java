@@ -44,7 +44,7 @@ public class TrieSET implements Iterable<String> {
 
     // R-way trie node
     private static class Node {
-        private Node[] next = new Node[R];
+        private final Node[] next = new Node[R];
         private boolean isString;
     }
 
@@ -131,7 +131,7 @@ public class TrieSET implements Iterable<String> {
      *     as an iterable
      */
     public Iterable<String> keysWithPrefix(String prefix) {
-        Queue<String> results = new Queue<String>();
+        Queue<String> results = new Queue<>();
         Node x = get(root, prefix, 0);
         collect(x, new StringBuilder(prefix), results);
         return results;
@@ -155,7 +155,7 @@ public class TrieSET implements Iterable<String> {
      *     as an iterable, where . is treated as a wildcard character.
      */  
     public Iterable<String> keysThatMatch(String pattern) {
-        Queue<String> results = new Queue<String>();
+        Queue<String> results = new Queue<>();
         StringBuilder prefix = new StringBuilder();
         collect(root, prefix, pattern, results);
         return results;

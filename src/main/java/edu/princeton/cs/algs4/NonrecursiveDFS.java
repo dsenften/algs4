@@ -61,7 +61,7 @@ import java.util.Iterator;
  *  @author Kevin Wayne
  */
 public class NonrecursiveDFS {
-    private boolean[] marked;  // marked[v] = is there an s-v path?
+    private final boolean[] marked;  // marked[v] = is there an s-v path?
     /**
      * Computes the vertices connected to the source vertex {@code s} in the graph {@code G}.
      * @param G the graph
@@ -80,7 +80,7 @@ public class NonrecursiveDFS {
             adj[v] = G.adj(v).iterator();
 
         // depth-first search using an explicit stack
-        Stack<Integer> stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
         marked[s] = true;
         stack.push(s);
         while (!stack.isEmpty()) {
