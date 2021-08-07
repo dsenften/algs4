@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac PatriciaSET.java
  *  Execution:    java PatriciaSET
  *  Dependencies: StdOut.java StdRandom.java Queue.java
@@ -91,7 +91,7 @@ import java.util.Iterator;
  *  @author John Hentosh (based on an implementation by Robert Sedgewick)
  */
 public class PatriciaSET implements Iterable<String> {
-    private Node head;
+    private final Node head;
     private int count;
 
     /* An inner Node class specifies the objects that hold each key. The b
@@ -99,14 +99,14 @@ public class PatriciaSET implements Iterable<String> {
      */
     private class Node {
         private Node left, right;
-        private String key;
+        private final String key;
         private int b;
 
         public Node(String key, int b) {
             this.key = key;
             this.b = b;
         }
-    };
+    }
 
     /**
      * Initializes an empty PATRICIA-based set.
@@ -254,7 +254,7 @@ public class PatriciaSET implements Iterable<String> {
      * @return an iterator to all of the keys in the set
      */
     public Iterator<String> iterator() {
-        Queue<String> queue = new Queue<String>();
+        Queue<String> queue = new Queue<>();
         if (head.left  != head) collect(head.left,  0, queue);
         if (head.right != head) collect(head.right, 0, queue);
         return queue.iterator();
@@ -297,8 +297,8 @@ public class PatriciaSET implements Iterable<String> {
      */
     private static boolean safeBitTest(String key, int b) {
         if (b < key.length() * 16)      return bitTest(key, b) != 0;
-        if (b > key.length() * 16 + 15) return false;   // padding
-        /* 16 bits of 0xffff */         return true;    // end marker
+        return b <= key.length() * 16 + 15;   // padding
+        /* 16 bits of 0xffff */// end marker
     }
 
     private static int bitTest(String key, int b) {
@@ -432,27 +432,3 @@ public class PatriciaSET implements Iterable<String> {
         if (!ok) throw new java.lang.RuntimeException("TESTS FAILED");
     }
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

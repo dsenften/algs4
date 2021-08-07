@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac BipartiteX.java
  *  Execution:    java  Bipartite V E F
  *  Dependencies: Graph.java 
@@ -42,9 +42,9 @@ public class BipartiteX {
     private static final boolean BLACK = true;
 
     private boolean isBipartite;   // is the graph bipartite?
-    private boolean[] color;       // color[v] gives vertices on one side of bipartition
-    private boolean[] marked;      // marked[v] = true iff v has been visited in DFS
-    private int[] edgeTo;          // edgeTo[v] = last edge on path to v
+    private final boolean[] color;       // color[v] gives vertices on one side of bipartition
+    private final boolean[] marked;      // marked[v] = true iff v has been visited in DFS
+    private final int[] edgeTo;          // edgeTo[v] = last edge on path to v
     private Queue<Integer> cycle;  // odd-length cycle
 
     /**
@@ -68,7 +68,7 @@ public class BipartiteX {
     }
 
     private void bfs(Graph G, int s) { 
-        Queue<Integer> q = new Queue<Integer>();
+        Queue<Integer> q = new Queue<>();
         color[s] = WHITE;
         marked[s] = true;
         q.enqueue(s);
@@ -89,8 +89,8 @@ public class BipartiteX {
                     // and let x be closest node to v and w common to two paths
                     // then (w-x path) + (x-v path) + (edge v-w) is an odd-length cycle
                     // Note: distTo[v] == distTo[w];
-                    cycle = new Queue<Integer>();
-                    Stack<Integer> stack = new Stack<Integer>();
+                    cycle = new Queue<>();
+                    Stack<Integer> stack = new Stack<>();
                     int x = v, y = w;
                     while (x != y) {
                         stack.push(x);
@@ -225,27 +225,3 @@ public class BipartiteX {
 
 
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

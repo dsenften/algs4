@@ -42,7 +42,7 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class DepthFirstSearch {
-    private boolean[] marked;    // marked[v] = is there an s-v path?
+    private final boolean[] marked;    // marked[v] = is there an s-v path?
     private int count;           // number of vertices connected to s
 
     /**

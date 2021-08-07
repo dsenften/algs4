@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac BTree.java
  *  Execution:    java BTree
  *  Dependencies: StdOut.java
@@ -55,7 +55,7 @@ public class BTree<Key extends Comparable<Key>, Value>  {
     // helper B-tree node data type
     private static final class Node {
         private int m;                             // number of children
-        private Entry[] children = new Entry[M];   // the array of children
+        private final Entry[] children = new Entry[M];   // the array of children
 
         // create a node with k children
         private Node(int k) {
@@ -223,12 +223,12 @@ public class BTree<Key extends Comparable<Key>, Value>  {
 
         if (ht == 0) {
             for (int j = 0; j < h.m; j++) {
-                s.append(indent + children[j].key + " " + children[j].val + "\n");
+                s.append(indent).append(children[j].key).append(" ").append(children[j].val).append("\n");
             }
         }
         else {
             for (int j = 0; j < h.m; j++) {
-                if (j > 0) s.append(indent + "(" + children[j].key + ")\n");
+                if (j > 0) s.append(indent).append("(").append(children[j].key).append(")\n");
                 s.append(toString(children[j].next, ht-1, indent + "     "));
             }
         }
@@ -252,7 +252,7 @@ public class BTree<Key extends Comparable<Key>, Value>  {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        BTree<String, String> st = new BTree<String, String>();
+        BTree<String, String> st = new BTree<>();
 
         st.put("www.cs.princeton.edu", "128.112.136.12");
         st.put("www.cs.princeton.edu", "128.112.136.11");
@@ -288,27 +288,3 @@ public class BTree<Key extends Comparable<Key>, Value>  {
     }
 
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

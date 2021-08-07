@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac MinPQ.java
  *  Execution:    java MinPQ < input.txt
  *  Dependencies: StdIn.java StdOut.java
@@ -259,13 +259,13 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     private class HeapIterator implements Iterator<Key> {
         // create a new pq
-        private MinPQ<Key> copy;
+        private final MinPQ<Key> copy;
 
         // add all items to copy of heap
         // takes linear time since already in heap order so no keys move
         public HeapIterator() {
-            if (comparator == null) copy = new MinPQ<Key>(size());
-            else                    copy = new MinPQ<Key>(size(), comparator);
+            if (comparator == null) copy = new MinPQ<>(size());
+            else                    copy = new MinPQ<>(size(), comparator);
             for (int i = 1; i <= n; i++)
                 copy.insert(pq[i]);
         }
@@ -285,7 +285,7 @@ public class MinPQ<Key> implements Iterable<Key> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        MinPQ<String> pq = new MinPQ<String>();
+        MinPQ<String> pq = new MinPQ<>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
             if (!item.equals("-")) pq.insert(item);
@@ -295,27 +295,3 @@ public class MinPQ<Key> implements Iterable<Key> {
     }
 
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

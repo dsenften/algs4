@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac Date.java
  *  Execution:    java Date
  *  Dependencies: StdOut.java
@@ -86,8 +86,7 @@ public class Date implements Comparable<Date> {
     private static boolean isValid(int m, int d, int y) {
         if (m < 1 || m > 12)      return false;
         if (d < 1 || d > DAYS[m]) return false;
-        if (m == 2 && d == 29 && !isLeapYear(y)) return false;
-        return true;
+        return m != 2 || d != 29 || isLeapYear(y);
     }
 
     // is y a leap year?
@@ -209,27 +208,3 @@ public class Date implements Comparable<Date> {
     }
 
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

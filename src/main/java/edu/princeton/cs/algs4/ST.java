@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac ST.java
  *  Execution:    java ST < input.txt
  *  Dependencies: StdIn.java StdOut.java
@@ -56,13 +56,13 @@ import java.util.TreeMap;
  */
 public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
 
-    private TreeMap<Key, Value> st;
+    private final TreeMap<Key, Value> st;
 
     /**
      * Initializes an empty symbol table.
      */
     public ST() {
-        st = new TreeMap<Key, Value>();
+        st = new TreeMap<>();
     }
 
 
@@ -238,7 +238,7 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        ST<String, Integer> st = new ST<String, Integer>();
+        ST<String, Integer> st = new ST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);
@@ -247,27 +247,3 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
             StdOut.println(s + " " + st.get(s));
     }
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
