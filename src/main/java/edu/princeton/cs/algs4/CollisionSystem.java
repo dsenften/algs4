@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac CollisionSystem.java
  *  Execution:    java CollisionSystem n               (n random particles)
  *                java CollisionSystem < input.txt     (from a file) 
@@ -35,9 +35,9 @@ import java.awt.Color;
 public class CollisionSystem {
     private static final double HZ = 0.5;    // number of redraw events per clock tick
 
-    private MinPQ<Event> pq;          // the priority queue
-    private double t  = 0.0;          // simulation clock time
-    private Particle[] particles;     // the array of particles
+    private MinPQ<Event> pq;            // the priority queue
+    private double t  = 0.0;            // simulation clock time
+    private final Particle[] particles; // the array of particles
 
     /**
      * Initializes a system with the specified collection of particles.
@@ -54,10 +54,10 @@ public class CollisionSystem {
         if (a == null) return;
 
         // particle-particle collisions
-        for (int i = 0; i < particles.length; i++) {
-            double dt = a.timeToHit(particles[i]);
+        for (Particle particle : particles) {
+            double dt = a.timeToHit(particle);
             if (t + dt <= limit)
-                pq.insert(new Event(t + dt, a, particles[i]));
+                pq.insert(new Event(t + dt, a, particle));
         }
 
         // particle-wall collisions
@@ -70,8 +70,8 @@ public class CollisionSystem {
     // redraw all particles
     private void redraw(double limit) {
         StdDraw.clear();
-        for (int i = 0; i < particles.length; i++) {
-            particles[i].draw();
+        for (Particle particle : particles) {
+            particle.draw();
         }
         StdDraw.show();
         StdDraw.pause(20);
@@ -86,12 +86,13 @@ public class CollisionSystem {
      *
      * @param  limit the amount of time
      */
+    @SuppressWarnings("ConstantConditions")
     public void simulate(double limit) {
         
         // initialize PQ with collision events and redraw event
-        pq = new MinPQ<Event>();
-        for (int i = 0; i < particles.length; i++) {
-            predict(particles[i], limit);
+        pq = new MinPQ<>();
+        for (Particle particle : particles) {
+            predict(particle, limit);
         }
         pq.insert(new Event(0, null, null));        // redraw event
 
@@ -106,8 +107,7 @@ public class CollisionSystem {
             Particle b = e.b;
 
             // physical collision, so update positions, and then simulation clock
-            for (int i = 0; i < particles.length; i++)
-                particles[i].move(e.time - t);
+            for (Particle particle : particles) particle.move(e.time - t);
             t = e.time;
 
             // process event
@@ -159,8 +159,7 @@ public class CollisionSystem {
         // has any collision occurred between when event was created and now?
         public boolean isValid() {
             if (a != null && a.count() != countA) return false;
-            if (b != null && b.count() != countB) return false;
-            return true;
+            return b == null || b.count() == countB;
         }
    
     }
@@ -217,27 +216,3 @@ public class CollisionSystem {
     }
       
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

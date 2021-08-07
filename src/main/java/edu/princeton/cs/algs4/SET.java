@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac SET.java
  *  Execution:    java SET
  *  Dependencies: StdOut.java
@@ -50,13 +50,14 @@ import java.util.TreeSet;
  */
 
 public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
-    private TreeSet<Key> set;
+
+    private final TreeSet<Key> set;
 
     /**
      * Initializes an empty set.
      */
     public SET() {
-        set = new TreeSet<Key>();
+        set = new TreeSet<>();
     }
 
     /**
@@ -65,7 +66,7 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
      * @param x the set to copy
      */
     public SET(SET<Key> x) {
-        set = new TreeSet<Key>(x.set);
+        set = new TreeSet<>(x.set);
     }
 
     /**
@@ -209,7 +210,7 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
      */
     public SET<Key> union(SET<Key> that) {
         if (that == null) throw new IllegalArgumentException("called union() with a null argument");
-        SET<Key> c = new SET<Key>();
+        SET<Key> c = new SET<>();
         for (Key x : this) {
             c.add(x);
         }
@@ -228,7 +229,7 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
      */
     public SET<Key> intersects(SET<Key> that) {
         if (that == null) throw new IllegalArgumentException("called intersects() with a null argument");
-        SET<Key> c = new SET<Key>();
+        SET<Key> c = new SET<>();
         if (this.size() < that.size()) {
             for (Key x : this) {
                 if (that.contains(x)) c.add(x);
@@ -259,7 +260,7 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
         if (other == this) return true;
         if (other == null) return false;
         if (other.getClass() != this.getClass()) return false;
-        SET that = (SET) other;
+        SET<Key> that = (SET<Key>) other;
         return this.set.equals(that.set);
     }
 
@@ -292,7 +293,7 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        SET<String> set = new SET<String>();
+        SET<String> set = new SET<>();
         StdOut.println("set = " + set);
 
         // insert some keys
@@ -338,32 +339,8 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
         }
 
         StdOut.println();
-        SET<String> set2 = new SET<String>(set);
+        SET<String> set2 = new SET<>(set);
         StdOut.println(set.equals(set2));
     }
 
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

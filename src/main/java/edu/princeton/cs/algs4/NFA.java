@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac NFA.java
  *  Execution:    java NFA regexp text
  *  Dependencies: Stack.java Bag.java Digraph.java DirectedDFS.java
@@ -56,8 +56,8 @@ package edu.princeton.cs.algs4;
  */
 public class NFA { 
 
-    private Digraph graph;     // digraph of epsilon transitions
-    private String regexp;     // regular expression
+    private final Digraph graph;     // digraph of epsilon transitions
+    private final String regexp;     // regular expression
     private final int m;       // number of characters in regular expression
 
     /**
@@ -68,7 +68,7 @@ public class NFA {
     public NFA(String regexp) {
         this.regexp = regexp;
         m = regexp.length();
-        Stack<Integer> ops = new Stack<Integer>(); 
+        Stack<Integer> ops = new Stack<>();
         graph = new Digraph(m+1); 
         for (int i = 0; i < m; i++) { 
             int lp = i; 
@@ -109,7 +109,7 @@ public class NFA {
      */
     public boolean recognizes(String txt) {
         DirectedDFS dfs = new DirectedDFS(graph, 0);
-        Bag<Integer> pc = new Bag<Integer>();
+        Bag<Integer> pc = new Bag<>();
         for (int v = 0; v < graph.V(); v++)
             if (dfs.marked(v)) pc.add(v);
 
@@ -118,14 +118,14 @@ public class NFA {
             if (txt.charAt(i) == '*' || txt.charAt(i) == '|' || txt.charAt(i) == '(' || txt.charAt(i) == ')')
                 throw new IllegalArgumentException("text contains the metacharacter '" + txt.charAt(i) + "'");
 
-            Bag<Integer> match = new Bag<Integer>();
+            Bag<Integer> match = new Bag<>();
             for (int v : pc) {
                 if (v == m) continue;
                 if ((regexp.charAt(v) == txt.charAt(i)) || regexp.charAt(v) == '.')
                     match.add(v+1); 
             }
             dfs = new DirectedDFS(graph, match); 
-            pc = new Bag<Integer>();
+            pc = new Bag<>();
             for (int v = 0; v < graph.V(); v++)
                 if (dfs.marked(v)) pc.add(v);
 
@@ -152,27 +152,3 @@ public class NFA {
     }
 
 } 
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

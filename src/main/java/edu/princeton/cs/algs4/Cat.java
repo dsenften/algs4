@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac Cat.java
  *  Execution:    java Cat input0.txt input1.txt ... output.txt
  *  Dependencies: In.java Out.java
@@ -62,7 +62,7 @@ public class Cat {
 
 }
 
-/******************************************************************************
+/*
  *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook

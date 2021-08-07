@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac SequentialSearchST.java
  *  Execution:    java SequentialSearchST
  *  Dependencies: StdIn.java StdOut.java
@@ -64,7 +64,7 @@ public class SequentialSearchST<Key, Value> {
 
     // a helper linked list data type
     private class Node {
-        private Key key;
+        private final Key key;
         private Value val;
         private Node next;
 
@@ -190,7 +190,7 @@ public class SequentialSearchST<Key, Value> {
      * @return all keys in the symbol table
      */
     public Iterable<Key> keys()  {
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         for (Node x = first; x != null; x = x.next)
             queue.enqueue(x.key);
         return queue;
@@ -203,7 +203,7 @@ public class SequentialSearchST<Key, Value> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        SequentialSearchST<String, Integer> st = new SequentialSearchST<String, Integer>();
+        SequentialSearchST<String, Integer> st = new SequentialSearchST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);
@@ -212,27 +212,3 @@ public class SequentialSearchST<Key, Value> {
             StdOut.println(s + " " + st.get(s));
     }
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

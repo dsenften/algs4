@@ -47,6 +47,7 @@ package edu.princeton.cs.algs4;
  *  For additional documentation, see <a href="https://algs4.cs.princeton.edu/52trie">Section 5.2</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  */
+@SuppressWarnings("DuplicatedCode")
 public class TrieST<Value> {
     private static final int R = 256;        // extended ASCII
 
@@ -57,7 +58,7 @@ public class TrieST<Value> {
     // R-way trie node
     private static class Node {
         private Object val;
-        private Node[] next = new Node[R];
+        private final Node[] next = new Node[R];
     }
 
    /**
@@ -159,7 +160,7 @@ public class TrieST<Value> {
      *     as an iterable
      */
     public Iterable<String> keysWithPrefix(String prefix) {
-        Queue<String> results = new Queue<String>();
+        Queue<String> results = new Queue<>();
         Node x = get(root, prefix, 0);
         collect(x, new StringBuilder(prefix), results);
         return results;
@@ -183,7 +184,7 @@ public class TrieST<Value> {
      *     as an iterable, where . is treated as a wildcard character.
      */
     public Iterable<String> keysThatMatch(String pattern) {
-        Queue<String> results = new Queue<String>();
+        Queue<String> results = new Queue<>();
         collect(root, new StringBuilder(), pattern, results);
         return results;
     }
@@ -274,7 +275,7 @@ public class TrieST<Value> {
     public static void main(String[] args) {
 
         // build symbol table from standard input
-        TrieST<Integer> st = new TrieST<Integer>();
+        TrieST<Integer> st = new TrieST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);
@@ -307,27 +308,3 @@ public class TrieST<Value> {
             StdOut.println(s);
     }
 }
-
-/*
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

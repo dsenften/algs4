@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac DepthFirstDirectedPaths.java
  *  Execution:    java DepthFirstDirectedPaths digraph.txt s
  *  Dependencies: Digraph.java Stack.java
@@ -50,8 +50,8 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class DepthFirstDirectedPaths {
-    private boolean[] marked;  // marked[v] = true iff v is reachable from s
-    private int[] edgeTo;      // edgeTo[v] = last edge on path from s to v
+    private final boolean[] marked;  // marked[v] = true iff v is reachable from s
+    private final int[] edgeTo;      // edgeTo[v] = last edge on path from s to v
     private final int s;       // source vertex
 
     /**
@@ -102,7 +102,7 @@ public class DepthFirstDirectedPaths {
     public Iterable<Integer> pathTo(int v) {
         validateVertex(v);
         if (!hasPathTo(v)) return null;
-        Stack<Integer> path = new Stack<Integer>();
+        Stack<Integer> path = new Stack<>();
         for (int x = v; x != s; x = edgeTo[x])
             path.push(x);
         path.push(s);
@@ -147,27 +147,3 @@ public class DepthFirstDirectedPaths {
     }
 
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac BST.java
  *  Execution:    java BST
  *  Dependencies: StdIn.java StdOut.java Queue.java
@@ -71,7 +71,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     private Node root;             // root of BST
 
     private class Node {
-        private Key key;           // sorted by key
+        private final Key key;           // sorted by key
         private Value val;         // associated data
         private Node left, right;  // left and right subtrees
         private int size;          // number of nodes in subtree
@@ -402,7 +402,7 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return all keys in the symbol table
      */
     public Iterable<Key> keys() {
-        if (isEmpty()) return new Queue<Key>();
+        if (isEmpty()) return new Queue<>();
         return keys(min(), max());
     }
 
@@ -421,7 +421,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
         if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
 
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         keys(root, queue, lo, hi);
         return queue;
     } 
@@ -473,8 +473,8 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return the keys in the BST in level order traversal
      */
     public Iterable<Key> levelOrder() {
-        Queue<Key> keys = new Queue<Key>();
-        Queue<Node> queue = new Queue<Node>();
+        Queue<Key> keys = new Queue<>();
+        Queue<Node> queue = new Queue<>();
         queue.enqueue(root);
         while (!queue.isEmpty()) {
             Node x = queue.dequeue();
@@ -536,7 +536,7 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) { 
-        BST<String, Integer> st = new BST<String, Integer>();
+        BST<String, Integer> st = new BST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);
@@ -551,27 +551,3 @@ public class BST<Key extends Comparable<Key>, Value> {
             StdOut.println(s + " " + st.get(s));
     }
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

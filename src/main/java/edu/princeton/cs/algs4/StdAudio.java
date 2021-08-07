@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac StdAudio.java
  *  Execution:    java StdAudio
  *  Dependencies: none
@@ -247,7 +247,7 @@ public final class StdAudio {
             double[] data = new double[n/2];
             for (int i = 0; i < n/2; i++) {
                 // little endian, mono
-                data[i] = ((short) (((bytes[2*i+1] & 0xFF) << 8) | (bytes[2*i] & 0xFF))) / ((double) MAX_16_BIT);
+                data[i] = ((short) (((bytes[2*i+1] & 0xFF) << 8) | (bytes[2*i] & 0xFF))) / MAX_16_BIT;
             }
             return data;
         }
@@ -256,8 +256,8 @@ public final class StdAudio {
         else if (audioFormat.getChannels() == STEREO) {
             double[] data = new double[n/4];
             for (int i = 0; i < n/4; i++) {
-                double left  = ((short) (((bytes[4*i+1] & 0xFF) << 8) | (bytes[4*i + 0] & 0xFF))) / ((double) MAX_16_BIT);
-                double right = ((short) (((bytes[4*i+3] & 0xFF) << 8) | (bytes[4*i + 2] & 0xFF))) / ((double) MAX_16_BIT);
+                double left  = ((short) (((bytes[4*i+1] & 0xFF) << 8) | (bytes[4*i + 0] & 0xFF))) / MAX_16_BIT;
+                double right = ((short) (((bytes[4*i+3] & 0xFF) << 8) | (bytes[4*i + 2] & 0xFF))) / MAX_16_BIT;
                 data[i] = (left + right) / 2.0;
             }
             return data;
@@ -428,11 +428,6 @@ public final class StdAudio {
      *
      * @param args the command-line arguments
      */
-    /**
-     * Test client - play an A major scale to standard audio.
-     *
-     * @param args the command-line arguments
-     */
     public static void main(String[] args) {
         
         // 440 Hz for 1 sec
@@ -454,27 +449,3 @@ public final class StdAudio {
         StdAudio.close(); 
     }
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

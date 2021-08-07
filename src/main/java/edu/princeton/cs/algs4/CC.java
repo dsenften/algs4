@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac CC.java
  *  Execution:    java CC filename.txt
  *  Dependencies: Graph.java StdOut.java Queue.java
@@ -61,9 +61,9 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class CC {
-    private boolean[] marked;   // marked[v] = has vertex v been marked?
-    private int[] id;           // id[v] = id of connected component containing v
-    private int[] size;         // size[id] = number of vertices in given component
+    private final boolean[] marked;   // marked[v] = has vertex v been marked?
+    private final int[] id;           // id[v] = id of connected component containing v
+    private final int[] size;         // size[id] = number of vertices in given component
     private int count;          // number of connected components
 
     /**
@@ -219,7 +219,7 @@ public class CC {
         // compute list of vertices in each connected component
         Queue<Integer>[] components = (Queue<Integer>[]) new Queue[m];
         for (int i = 0; i < m; i++) {
-            components[i] = new Queue<Integer>();
+            components[i] = new Queue<>();
         }
         for (int v = 0; v < G.V(); v++) {
             components[cc.id(v)].enqueue(v);
@@ -234,27 +234,3 @@ public class CC {
         }
     }
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

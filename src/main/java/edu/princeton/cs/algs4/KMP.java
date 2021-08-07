@@ -48,7 +48,7 @@ package edu.princeton.cs.algs4;
 public class KMP {
     private final int R;       // the radix
     private final int m;       // length of pattern
-    private int[][] dfa;       // the KMP automoton
+    private final int[][] dfa;       // the KMP automoton
 
     /**
      * Preprocesses the pattern string.

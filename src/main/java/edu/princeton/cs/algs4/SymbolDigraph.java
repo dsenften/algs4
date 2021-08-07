@@ -41,9 +41,9 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class SymbolDigraph {
-    private ST<String, Integer> st;  // string -> index
-    private String[] keys;           // index  -> string
-    private Digraph graph;           // the underlying digraph
+    private final ST<String, Integer> st;  // string -> index
+    private final String[] keys;           // index  -> string
+    private final Digraph graph;           // the underlying digraph
 
     /**  
      * Initializes a digraph from a file using the specified delimiter.
@@ -54,16 +54,16 @@ public class SymbolDigraph {
      * @param delimiter the delimiter between fields
      */
     public SymbolDigraph(String filename, String delimiter) {
-        st = new ST<String, Integer>();
+        st = new ST<>();
 
         // First pass builds the index by reading strings to associate
         // distinct strings with an index
         In in = new In(filename);
         while (in.hasNextLine()) {
             String[] a = in.readLine().split(delimiter);
-            for (int i = 0; i < a.length; i++) {
-                if (!st.contains(a[i]))
-                    st.put(a[i], st.size());
+            for (String s : a) {
+                if (!st.contains(s))
+                    st.put(s, st.size());
             }
         }
 
@@ -187,27 +187,3 @@ public class SymbolDigraph {
         }
     }
 }
-
-/*
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
