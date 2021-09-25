@@ -48,14 +48,14 @@ public class Quick {
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
-    public static void sort(Comparable[] a) {
+    public static <T> void sort(Comparable<T>[] a) {
         StdRandom.shuffle(a);
         sort(a, 0, a.length - 1);
         assert isSorted(a);
     }
 
     // quicksort the subarray from a[lo] to a[hi]
-    private static void sort(Comparable[] a, int lo, int hi) { 
+    private static <T> void sort(Comparable<T>[] a, int lo, int hi) {
         if (hi <= lo) return;
         int j = partition(a, lo, hi);
         sort(a, lo, j-1);
@@ -65,10 +65,10 @@ public class Quick {
 
     // partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
     // and return the index j.
-    private static int partition(Comparable[] a, int lo, int hi) {
+    private static  <T>int partition(Comparable<T>[] a, int lo, int hi) {
         int i = lo;
         int j = hi + 1;
-        Comparable v = a[lo];
+        Comparable<T> v = a[lo];
         while (true) { 
 
             // find item on lo to swap
@@ -104,7 +104,7 @@ public class Quick {
      * @return the key of rank {@code k}
      * @throws IllegalArgumentException unless {@code 0 <= k < a.length}
      */
-    public static Comparable select(Comparable[] a, int k) {
+    public static <T> Comparable<T> select(Comparable<T>[] a, int k) {
         if (k < 0 || k >= a.length) {
             throw new IllegalArgumentException("index is not between 0 and " + a.length + ": " + k);
         }
@@ -126,9 +126,10 @@ public class Quick {
     ***************************************************************************/
     
     // is v < w ?
-    private static boolean less(Comparable v, Comparable w) {
+    @SuppressWarnings("unchecked")
+    private static <T> boolean less(Comparable<T> v, Comparable<T> w) {
         if (v == w) return false;   // optimization when reference equals
-        return v.compareTo(w) < 0;
+        return v.compareTo((T) w) < 0;
     }
         
     // exchange a[i] and a[j]
@@ -142,11 +143,11 @@ public class Quick {
    /***************************************************************************
     *  Check if array is sorted - useful for debugging.
     ***************************************************************************/
-    private static boolean isSorted(Comparable[] a) {
+    private static <T> boolean isSorted(Comparable<T>[] a) {
         return isSorted(a, 0, a.length - 1);
     }
 
-    private static boolean isSorted(Comparable[] a, int lo, int hi) {
+    private static <T> boolean isSorted(Comparable<T>[] a, int lo, int hi) {
         for (int i = lo + 1; i <= hi; i++)
             if (less(a[i], a[i-1])) return false;
         return true;
@@ -154,9 +155,9 @@ public class Quick {
 
 
     // print array to standard output
-    private static void show(Comparable[] a) {
-        for (int i = 0; i < a.length; i++) {
-            StdOut.println(a[i]);
+    private static <T> void show(Comparable<T>[] a) {
+        for (Comparable<T> tComparable : a) {
+            StdOut.println(tComparable);
         }
     }
 

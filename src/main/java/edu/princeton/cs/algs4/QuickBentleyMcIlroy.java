@@ -4,7 +4,7 @@
  *  Dependencies: StdOut.java StdIn.java
  *  Data files:   https://algs4.cs.princeton.edu/23quicksort/tiny.txt
  *                https://algs4.cs.princeton.edu/23quicksort/words3.txt
- *  
+ *
  *  Uses the Bentley-McIlroy 3-way partitioning scheme,
  *  chooses the partitioning element using Tukey's ninther,
  *  and cuts off to insertion sort.
@@ -18,19 +18,18 @@
 package edu.princeton.cs.algs4;
 
 /**
- *  The {@code QuickBentleyMcIlroy} class provides static methods for sorting
- *  an array using an optimized version of quicksort (using Bentley-McIlroy
- *  3-way partitioning, Tukey's ninther, and cutoff to insertion sort).
- *  <p>
- *  For additional documentation, see
- *  <a href="https://algs4.cs.princeton.edu/23quicksort">Section 2.3</a>   
- *  of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code QuickBentleyMcIlroy} class provides static methods for sorting
+ * an array using an optimized version of quicksort (using Bentley-McIlroy
+ * 3-way partitioning, Tukey's ninther, and cutoff to insertion sort).
+ * <p>
+ * For additional documentation, see
+ * <a href="https://algs4.cs.princeton.edu/23quicksort">Section 2.3</a>
+ * of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
-@SuppressWarnings("unused")
-public class QuickBentleyMcIlroy<T extends Comparable<T>> {
+public class QuickBentleyMcIlroy {
 
     // cutoff to insertion sort, must be >= 1
     private static final int INSERTION_SORT_CUTOFF = 8;
@@ -39,10 +38,12 @@ public class QuickBentleyMcIlroy<T extends Comparable<T>> {
     private static final int MEDIAN_OF_3_CUTOFF = 40;
 
     // This class should not be instantiated.
-    private QuickBentleyMcIlroy() { }
+    private QuickBentleyMcIlroy() {
+    }
 
     /**
      * Rearranges the array in ascending order, using the natural order.
+     *
      * @param a the array to be sorted
      */
     public static <E> void sort(Comparable<E>[] a) {
@@ -60,24 +61,24 @@ public class QuickBentleyMcIlroy<T extends Comparable<T>> {
 
         // use median-of-3 as partitioning element
         else if (n <= MEDIAN_OF_3_CUTOFF) {
-            int m = median3(a, lo, lo + n/2, hi);
+            int m = median3(a, lo, lo + n / 2, hi);
             exch(a, m, lo);
         }
 
         // use Tukey ninther as partitioning element
-        else  {
-            int eps = n/8;
-            int mid = lo + n/2;
+        else {
+            int eps = n / 8;
+            int mid = lo + n / 2;
             int m1 = median3(a, lo, lo + eps, lo + eps + eps);
             int m2 = median3(a, mid - eps, mid, mid + eps);
-            int m3 = median3(a, hi - eps - eps, hi - eps, hi); 
+            int m3 = median3(a, hi - eps - eps, hi - eps, hi);
             int ninther = median3(a, m1, m2, m3);
             exch(a, ninther, lo);
         }
 
         // Bentley-McIlroy 3-way partitioning
-        int i = lo, j = hi+1;
-        int p = lo, q = hi+1;
+        int i = lo, j = hi + 1;
+        int p = lo, q = hi + 1;
         Comparable<E> v = a[lo];
         while (true) {
             while (less(a[++i], v))
@@ -110,8 +111,8 @@ public class QuickBentleyMcIlroy<T extends Comparable<T>> {
     // sort from a[lo] to a[hi] using insertion sort
     private static <E> void insertionSort(Comparable<E>[] a, int lo, int hi) {
         for (int i = lo; i <= hi; i++)
-            for (int j = i; j > lo && less(a[j], a[j-1]); j--)
-                exch(a, j, j-1);
+            for (int j = i; j > lo && less(a[j], a[j - 1]); j--)
+                exch(a, j, j - 1);
     }
 
 
@@ -119,14 +120,14 @@ public class QuickBentleyMcIlroy<T extends Comparable<T>> {
     @SuppressWarnings("DuplicatedCode")
     private static <E> int median3(Comparable<E>[] a, int i, int j, int k) {
         return (less(a[i], a[j]) ?
-               (less(a[j], a[k]) ? j : less(a[i], a[k]) ? k : i) :
-               (less(a[k], a[j]) ? j : less(a[k], a[i]) ? k : i));
+                (less(a[j], a[k]) ? j : less(a[i], a[k]) ? k : i) :
+                (less(a[k], a[j]) ? j : less(a[k], a[i]) ? k : i));
     }
 
-   /***************************************************************************
-    *  Helper sorting functions.
-    ***************************************************************************/
-    
+    /***************************************************************************
+     *  Helper sorting functions.
+     ***************************************************************************/
+
     // is v < w ?
     @SuppressWarnings("unchecked")
     private static <E> boolean less(Comparable<E> v, Comparable<E> w) {
@@ -140,7 +141,7 @@ public class QuickBentleyMcIlroy<T extends Comparable<T>> {
         if (v == w) return true;    // optimization when reference equal
         return v.compareTo((E) w) == 0;
     }
-        
+
     // exchange a[i] and a[j]
     private static void exch(Object[] a, int i, int j) {
         Object swap = a[i];
@@ -149,12 +150,12 @@ public class QuickBentleyMcIlroy<T extends Comparable<T>> {
     }
 
 
-   /***************************************************************************
-    *  Check if array is sorted - useful for debugging.
-    ***************************************************************************/
+    /***************************************************************************
+     *  Check if array is sorted - useful for debugging.
+     ***************************************************************************/
     private static <E> boolean isSorted(Comparable<E>[] a) {
         for (int i = 1; i < a.length; i++)
-            if (less(a[i], a[i-1])) return false;
+            if (less(a[i], a[i - 1])) return false;
         return true;
     }
 
@@ -167,8 +168,8 @@ public class QuickBentleyMcIlroy<T extends Comparable<T>> {
 
     /**
      * Reads in a sequence of strings from standard input; quicksorts them
-     * (using an optimized version of quicksort); 
-     * and prints them to standard output in ascending order. 
+     * (using an optimized version of quicksort);
+     * and prints them to standard output in ascending order.
      *
      * @param args the command-line arguments
      */
