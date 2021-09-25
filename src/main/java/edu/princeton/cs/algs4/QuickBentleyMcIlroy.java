@@ -29,7 +29,8 @@ package edu.princeton.cs.algs4;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public class QuickBentleyMcIlroy {
+@SuppressWarnings("unused")
+public class QuickBentleyMcIlroy<T extends Comparable<T>> {
 
     // cutoff to insertion sort, must be >= 1
     private static final int INSERTION_SORT_CUTOFF = 8;
@@ -44,11 +45,11 @@ public class QuickBentleyMcIlroy {
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
-    public static void sort(Comparable[] a) {
+    public static <E> void sort(Comparable<E>[] a) {
         sort(a, 0, a.length - 1);
     }
 
-    private static void sort(Comparable[] a, int lo, int hi) { 
+    private static <E> void sort(Comparable<E>[] a, int lo, int hi) {
         int n = hi - lo + 1;
 
         // cutoff to insertion sort
@@ -77,7 +78,7 @@ public class QuickBentleyMcIlroy {
         // Bentley-McIlroy 3-way partitioning
         int i = lo, j = hi+1;
         int p = lo, q = hi+1;
-        Comparable v = a[lo];
+        Comparable<E> v = a[lo];
         while (true) {
             while (less(a[++i], v))
                 if (i == hi) break;
@@ -107,7 +108,7 @@ public class QuickBentleyMcIlroy {
 
 
     // sort from a[lo] to a[hi] using insertion sort
-    private static void insertionSort(Comparable[] a, int lo, int hi) {
+    private static <E> void insertionSort(Comparable<E>[] a, int lo, int hi) {
         for (int i = lo; i <= hi; i++)
             for (int j = i; j > lo && less(a[j], a[j-1]); j--)
                 exch(a, j, j-1);
@@ -115,7 +116,8 @@ public class QuickBentleyMcIlroy {
 
 
     // return the index of the median element among a[i], a[j], and a[k]
-    private static int median3(Comparable[] a, int i, int j, int k) {
+    @SuppressWarnings("DuplicatedCode")
+    private static <E> int median3(Comparable<E>[] a, int i, int j, int k) {
         return (less(a[i], a[j]) ?
                (less(a[j], a[k]) ? j : less(a[i], a[k]) ? k : i) :
                (less(a[k], a[j]) ? j : less(a[k], a[i]) ? k : i));
@@ -126,15 +128,17 @@ public class QuickBentleyMcIlroy {
     ***************************************************************************/
     
     // is v < w ?
-    private static boolean less(Comparable v, Comparable w) {
+    @SuppressWarnings("unchecked")
+    private static <E> boolean less(Comparable<E> v, Comparable<E> w) {
         if (v == w) return false;    // optimization when reference equal
-        return v.compareTo(w) < 0;
+        return v.compareTo((E) w) < 0;
     }
 
     // does v == w ?
-    private static boolean eq(Comparable v, Comparable w) {
+    @SuppressWarnings("unchecked")
+    private static <E> boolean eq(Comparable<E> v, Comparable<E> w) {
         if (v == w) return true;    // optimization when reference equal
-        return v.compareTo(w) == 0;
+        return v.compareTo((E) w) == 0;
     }
         
     // exchange a[i] and a[j]
@@ -148,16 +152,16 @@ public class QuickBentleyMcIlroy {
    /***************************************************************************
     *  Check if array is sorted - useful for debugging.
     ***************************************************************************/
-    private static boolean isSorted(Comparable[] a) {
+    private static <E> boolean isSorted(Comparable<E>[] a) {
         for (int i = 1; i < a.length; i++)
             if (less(a[i], a[i-1])) return false;
         return true;
     }
 
     // print array to standard output
-    private static void show(Comparable[] a) {
-        for (int i = 0; i < a.length; i++) {
-            StdOut.println(a[i]);
+    private static <E> void show(Comparable<E>[] a) {
+        for (Comparable<E> eComparable : a) {
+            StdOut.println(eComparable);
         }
     }
 
