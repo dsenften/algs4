@@ -44,6 +44,7 @@ import java.util.Comparator;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+@SuppressWarnings("all")
 public class MergeX {
     private static final int CUTOFF = 7;  // cutoff to insertion sort
 
@@ -132,7 +133,7 @@ public class MergeX {
     }
 
 
-    /*******************************************************************
+    /* ******************************************************************
      *  Version that takes Comparator as argument.
      *******************************************************************/
 
@@ -219,8 +220,8 @@ public class MergeX {
 
     // print array to standard output
     private static void show(Object[] a) {
-        for (int i = 0; i < a.length; i++) {
-            StdOut.println(a[i]);
+        for (Object o : a) {
+            StdOut.println(o);
         }
     }
 
