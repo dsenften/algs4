@@ -38,7 +38,7 @@ import java.util.NoSuchElementException;
  *  <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
  *  It also provides ordered methods for finding the <em>minimum</em>,
  *  <em>maximum</em>, <em>floor</em>, and <em>ceiling</em>.
- *  It also provides a <em>keys</em> method for iterating over all of the keys.
+ *  It also provides a <em>keys</em> method for iterating over all the keys.
  *  A symbol table implements the <em>associative array</em> abstraction:
  *  when associating a value with a key that is already in the symbol table,
  *  the convention is to replace the old value with the new value.
@@ -76,6 +76,7 @@ import java.util.NoSuchElementException;
  *  @author Kevin Wayne
  */
 
+@SuppressWarnings("all")
 public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     private static final boolean RED   = true;
@@ -138,7 +139,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Standard BST search.
     ***************************************************************************/
 
@@ -176,7 +177,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return get(key) != null;
     }
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Red-black tree insertion.
     ***************************************************************************/
 
@@ -220,7 +221,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return h;
     }
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Red-black tree deletion.
     ***************************************************************************/
 
@@ -325,8 +326,10 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
                 Node x = min(h.right);
                 h.key = x.key;
                 h.val = x.val;
-                // h.val = get(h.right, min(h.right).key);
-                // h.key = min(h.right).key;
+                /*
+                 * h.val = get(h.right, min(h.right).key);
+                 * h.key = min(h.right).key;
+                 */
                 h.right = deleteMin(h.right);
             }
             else h.right = delete(h.right, key);
@@ -334,7 +337,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return balance(h);
     }
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Red-black tree helper functions.
     ***************************************************************************/
 
@@ -366,10 +369,12 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     // flip the colors of a node and its two children
     private void flipColors(Node h) {
-        // h must have opposite color of its two children
-        // assert (h != null) && (h.left != null) && (h.right != null);
-        // assert (!isRed(h) &&  isRed(h.left) &&  isRed(h.right))
-        //    || (isRed(h)  && !isRed(h.left) && !isRed(h.right));
+        /*
+         * h must have opposite color of its two children
+         * assert (h != null) && (h.left != null) && (h.right != null);
+         * assert (!isRed(h) &&  isRed(h.left) &&  isRed(h.right))
+         *    || (isRed(h)  && !isRed(h.left) && !isRed(h.right));
+         */
         h.color = !h.color;
         h.left.color = !h.left.color;
         h.right.color = !h.right.color;
@@ -378,8 +383,10 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     // Assuming that h is red and both h.left and h.left.left
     // are black, make h.left or one of its children red.
     private Node moveRedLeft(Node h) {
-        // assert (h != null);
-        // assert isRed(h) && !isRed(h.left) && !isRed(h.left.left);
+        /*
+         * assert (h != null);
+         * assert isRed(h) && !isRed(h.left) && !isRed(h.left.left);
+         */
 
         flipColors(h);
         if (isRed(h.right.left)) { 
@@ -393,8 +400,11 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     // Assuming that h is red and both h.right and h.right.left
     // are black, make h.right or one of its children red.
     private Node moveRedRight(Node h) {
-        // assert (h != null);
-        // assert isRed(h) && !isRed(h.right) && !isRed(h.right.left);
+        /*
+         * assert (h != null);
+         * assert isRed(h) && !isRed(h.right) && !isRed(h.right.left);
+         */
+
         flipColors(h);
         if (isRed(h.left.left)) { 
             h = rotateRight(h);
@@ -416,7 +426,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Utility functions.
     ***************************************************************************/
 
@@ -432,7 +442,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return 1 + Math.max(height(x.left), height(x.right));
     }
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Ordered symbol table methods.
     ***************************************************************************/
 
@@ -571,18 +581,18 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         else              return size(x.left); 
     } 
 
-   /***************************************************************************
+   /* **************************************************************************
     *  Range count and range search.
     ***************************************************************************/
 
     /**
      * Returns all keys in the symbol table as an {@code Iterable}.
-     * To iterate over all of the keys in the symbol table named {@code st},
+     * To iterate over all the keys in the symbol table named {@code st},
      * use the foreach notation: {@code for (Key key : st.keys())}.
      * @return all keys in the symbol table as an {@code Iterable}
      */
     public Iterable<Key> keys() {
-        if (isEmpty()) return new Queue<Key>();
+        if (isEmpty()) return new Queue<>();
         return keys(min(), max());
     }
 
@@ -601,7 +611,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
         if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
 
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         // if (isEmpty() || lo.compareTo(hi) > 0) return queue;
         keys(root, queue, lo, hi);
         return queue;
@@ -694,7 +704,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return is23(x.left) && is23(x.right);
     } 
 
-    // do all paths from root to leaf have same number of black edges?
+    // do all paths from root to leaf have the same number of black edges?
     private boolean isBalanced() { 
         int black = 0;     // number of black links on path from root to min
         Node x = root;
@@ -719,7 +729,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) { 
-        RedBlackBST<String, Integer> st = new RedBlackBST<String, Integer>();
+        RedBlackBST<String, Integer> st = new RedBlackBST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);

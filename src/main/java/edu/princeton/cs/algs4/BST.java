@@ -34,7 +34,7 @@ import java.util.NoSuchElementException;
  *  <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
  *  It also provides ordered methods for finding the <em>minimum</em>,
  *  <em>maximum</em>, <em>floor</em>, <em>select</em>, <em>ceiling</em>.
- *  It also provides a <em>keys</em> method for iterating over all of the keys.
+ *  It also provides a <em>keys</em> method for iterating over all the keys.
  *  A symbol table implements the <em>associative array</em> abstraction:
  *  when associating a value with a key that is already in the symbol table,
  *  the convention is to replace the old value with the new value.
@@ -67,6 +67,7 @@ import java.util.NoSuchElementException;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+@SuppressWarnings("all")
 public class BST<Key extends Comparable<Key>, Value> {
     private Node root;             // root of BST
 
@@ -396,7 +397,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns all keys in the symbol table as an {@code Iterable}.
-     * To iterate over all of the keys in the symbol table named {@code st},
+     * To iterate over all the keys in the symbol table named {@code st},
      * use the foreach notation: {@code for (Key key : st.keys())}.
      *
      * @return all keys in the symbol table
