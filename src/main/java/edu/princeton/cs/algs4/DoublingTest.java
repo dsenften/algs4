@@ -1,4 +1,5 @@
 /******************************************************************************
+ * <pre>
  *  Compilation:  javac DoublingTest.java
  *  Execution:    java DoublingTest
  *  Dependencies: ThreeSum.java Stopwatch.java StdRandom.java StdOut.java
@@ -11,7 +12,7 @@
  *     4000     4.5
  *     8000    35.7
  *  ...
- *
+ * </pre>
  ******************************************************************************/
 
 package edu.princeton.cs.algs4;
@@ -26,8 +27,9 @@ package edu.princeton.cs.algs4;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+@SuppressWarnings("all")
 public class DoublingTest {
-    private static final int MAXIMUM_INTEGER = 1000000;
+    private static final int MAXIMUM_INTEGER = 1_000_000;
 
     // This class should not be instantiated.
     private DoublingTest() { }
@@ -63,7 +65,7 @@ public class DoublingTest {
     } 
 }
 
-/******************************************************************************
+/*
  *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
@@ -85,4 +87,4 @@ public class DoublingTest {
  *
  *  You should have received a copy of the GNU General Public License
  *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ */
