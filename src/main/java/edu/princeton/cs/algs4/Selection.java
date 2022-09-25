@@ -42,7 +42,7 @@ import java.util.Comparator;
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
-@SuppressWarnings("SameParameterValue")
+@SuppressWarnings("all")
 public class Selection {
 
     // This class should not be instantiated.
