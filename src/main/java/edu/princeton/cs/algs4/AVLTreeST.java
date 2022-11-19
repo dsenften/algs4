@@ -33,7 +33,7 @@ import java.util.NoSuchElementException;
  *  <em>contains</em>, <em>delete</em>, <em>size</em>, and <em>is-empty</em>
  *  methods. It also provides ordered methods for finding the <em>minimum</em>,
  *  <em>maximum</em>, <em>floor</em>, and <em>ceiling</em>. It also provides a
- *  <em>keys</em> method for iterating over all of the keys. A symbol table
+ *  <em>keys</em> method for iterating over all the keys. A symbol table
  *  implements the <em>associative array</em> abstraction: when associating a
  *  value with a key that is already in the symbol table, the convention is to
  *  replace the old value with the new value. Unlike {@link java.util.Map}, this
@@ -56,7 +56,7 @@ import java.util.NoSuchElementException;
  *  <em>floor</em> operations each take logarithmic time in the worst case. The
  *  <em>size</em>, and <em>is-empty</em> operations take constant time.
  *  Construction also takes constant time.
- * 
+ *  <p>
  *  For other implementations of the same API, see {@link ST}, {@link BinarySearchST},
  *  {@link SequentialSearchST}, {@link BST}, {@link RedBlackBST},
  *  {@link SeparateChainingHashST}, and {@link LinearProbingHashST}.
@@ -64,6 +64,7 @@ import java.util.NoSuchElementException;
  *  @author Marcelo Silva
  */
 
+@SuppressWarnings("all")
 public class AVLTreeST<Key extends Comparable<Key>, Value> {
 
     /**
@@ -603,7 +604,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @return all keys in the symbol table following an in-order traversal
      */
     public Iterable<Key> keysInOrder() {
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         keysInOrder(root, queue);
         return queue;
     }
@@ -627,9 +628,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @return all keys in the symbol table following a level-order traversal.
      */
     public Iterable<Key> keysLevelOrder() {
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         if (!isEmpty()) {
-            Queue<Node> queue2 = new Queue<Node>();
+            Queue<Node> queue2 = new Queue<>();
             queue2.enqueue(root);
             while (!queue2.isEmpty()) {
                 Node x = queue2.dequeue();
@@ -658,7 +659,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     public Iterable<Key> keys(Key lo, Key hi) {
         if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
         if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         keys(root, queue, lo, hi);
         return queue;
     }
@@ -799,7 +800,7 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        AVLTreeST<String, Integer> st = new AVLTreeST<String, Integer>();
+        AVLTreeST<String, Integer> st = new AVLTreeST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);
