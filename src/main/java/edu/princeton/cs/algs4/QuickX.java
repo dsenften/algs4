@@ -25,6 +25,9 @@ package edu.princeton.cs.algs4;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+
+// java:S3358 - Ternary operators should not be nested
+@SuppressWarnings({"java:S3358", "java:S4274", "StatementWithEmptyBody", "DuplicatedCode"})
 public class QuickX {
 
     // cutoff to insertion sort, must be >= 1
@@ -37,14 +40,14 @@ public class QuickX {
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
-    public static void sort(Comparable[] a) {
-        // StdRandom.shuffle(a);
+    public static <T> void sort(Comparable<T>[] a) {
+        StdRandom.shuffle(a);
         sort(a, 0, a.length - 1);
         assert isSorted(a);
     }
 
     // quicksort the subarray from a[lo] to a[hi]
-    private static void sort(Comparable[] a, int lo, int hi) { 
+    private static <T> void sort(Comparable<T>[] a, int lo, int hi) {
         if (hi <= lo) return;
 
         // cutoff to insertion sort (Insertion.sort() uses half-open intervals)
@@ -61,14 +64,14 @@ public class QuickX {
 
     // partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
     // and return the index j.
-    private static int partition(Comparable[] a, int lo, int hi) {
+    private static <T> int partition(Comparable<T>[] a, int lo, int hi) {
         int n = hi - lo + 1;
         int m = median3(a, lo, lo + n/2, hi);
         exch(a, m, lo);
 
         int i = lo;
         int j = hi + 1;
-        Comparable v = a[lo];
+        Comparable<T> v = a[lo];
 
         // a[lo] is unique largest element
         while (less(a[++i], v)) {
@@ -95,7 +98,7 @@ public class QuickX {
     }
 
     // return the index of the median element among a[i], a[j], and a[k]
-    private static int median3(Comparable[] a, int i, int j, int k) {
+    private static <T> int median3(Comparable<T>[] a, int i, int j, int k) {
         return (less(a[i], a[j]) ?
                (less(a[j], a[k]) ? j : less(a[i], a[k]) ? k : i) :
                (less(a[k], a[j]) ? j : less(a[k], a[i]) ? k : i));
@@ -121,16 +124,16 @@ public class QuickX {
    /***************************************************************************
     *  Check if array is sorted - useful for debugging.
     ***************************************************************************/
-    private static boolean isSorted(Comparable[] a) {
+    private static <T> boolean isSorted(Comparable<T>[] a) {
         for (int i = 1; i < a.length; i++)
             if (less(a[i], a[i-1])) return false;
         return true;
     }
 
     // print array to standard output
-    private static void show(Comparable[] a) {
-        for (int i = 0; i < a.length; i++) {
-            StdOut.println(a[i]);
+    private static <T> void show(Comparable<T>[] a) {
+        for (Comparable<T> element : a) {
+            StdOut.println(element);
         }
     }
 
@@ -142,7 +145,7 @@ public class QuickX {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        String[] a = StdIn.readAllStrings();
+        String[] a = StdIn.readAllStrings(); // Q U I C K S O R T E X A M P L E
         QuickX.sort(a);
         assert isSorted(a);
         show(a);

@@ -39,7 +39,7 @@
 package edu.princeton.cs.algs4;
 
 /**
- *  The {@code TST} class represents an symbol table of key-value
+ *  The {@code TST} class represents a symbol table of key-value
  *  pairs, with string keys and generic values.
  *  It supports the usual <em>put</em>, <em>get</em>, <em>contains</em>,
  *  <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
@@ -146,7 +146,7 @@ public class TST<Value> {
     private Node<Value> put(Node<Value> x, String key, Value val, int d) {
         char c = key.charAt(d);
         if (x == null) {
-            x = new Node<Value>();
+            x = new Node<>();
             x.c = c;
         }
         if      (c < x.c)               x.left  = put(x.left,  key, val, d);
@@ -192,13 +192,13 @@ public class TST<Value> {
      * @return all keys in the symbol table as an {@code Iterable}
      */
     public Iterable<String> keys() {
-        Queue<String> queue = new Queue<String>();
+        Queue<String> queue = new Queue<>();
         collect(root, new StringBuilder(), queue);
         return queue;
     }
 
     /**
-     * Returns all of the keys in the set that start with {@code prefix}.
+     * Returns all the keys in the set that start with {@code prefix}.
      * @param prefix the prefix
      * @return all of the keys in the set that start with {@code prefix},
      *     as an iterable
@@ -208,7 +208,7 @@ public class TST<Value> {
         if (prefix == null) {
             throw new IllegalArgumentException("calls keysWithPrefix() with null argument");
         }
-        Queue<String> queue = new Queue<String>();
+        Queue<String> queue = new Queue<>();
         Node<Value> x = get(root, prefix, 0);
         if (x == null) return queue;
         if (x.val != null) queue.enqueue(prefix);
@@ -235,7 +235,7 @@ public class TST<Value> {
      *     as an iterable, where . is treated as a wildcard character.
      */
     public Iterable<String> keysThatMatch(String pattern) {
-        Queue<String> queue = new Queue<String>();
+        Queue<String> queue = new Queue<>();
         collect(root, new StringBuilder(), 0, pattern, queue);
         return queue;
     }
@@ -263,7 +263,7 @@ public class TST<Value> {
     public static void main(String[] args) {
 
         // build symbol table from standard input
-        TST<Integer> st = new TST<Integer>();
+        TST<Integer> st = new TST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);
