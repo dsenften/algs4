@@ -39,6 +39,10 @@ package edu.princeton.cs.algs4;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+
+// java:S1659 - Multiple variables should not be declared on the same line
+// java:S4274 - Asserts should not be used to check the parameters of a public method
+@SuppressWarnings({"java:S4274", "java:S1659"})
 public class Quick {
 
     // This class should not be instantiated.
@@ -49,7 +53,7 @@ public class Quick {
      * @param a the array to be sorted
      */
     public static <T> void sort(Comparable<T>[] a) {
-        StdRandom.shuffle(a);
+        StdRandom.shuffle(a); // Removes the input dependency
         sort(a, 0, a.length - 1);
         assert isSorted(a);
     }
@@ -65,7 +69,7 @@ public class Quick {
 
     // partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
     // and return the index j.
-    private static  <T>int partition(Comparable<T>[] a, int lo, int hi) {
+    private static  <T> int partition(Comparable<T>[] a, int lo, int hi) {
         int i = lo;
         int j = hi + 1;
         Comparable<T> v = a[lo];
@@ -170,7 +174,7 @@ public class Quick {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        String[] a = StdIn.readAllStrings();
+        String[] a = StdIn.readAllStrings(); // Q U I C K S O R T E X A M P L E
         Quick.sort(a);
         show(a);
         assert isSorted(a);
