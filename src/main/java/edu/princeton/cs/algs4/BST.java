@@ -519,12 +519,9 @@ public class BST<Key extends Comparable<Key>, Value> {
             return 0;
         }
 
-        // TODO Simplify if statement
-        if (contains(hi)) {
-            return rank(hi) - rank(lo) + 1;
-        } else {
-            return rank(hi) - rank(lo);
-        }
+        return (contains(hi))
+                ? rank(hi) - rank(lo) + 1
+                : rank(hi) - rank(lo);
     }
 
     /**
