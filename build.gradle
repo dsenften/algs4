@@ -1,3 +1,4 @@
+//file:noinspection GroovyAssignabilityCheck
 plugins {
     id 'java'
     id 'maven-publish'
@@ -23,17 +24,32 @@ dependencies {
 group = 'edu.princeton.cs'
 version = '1.0.5-SNAPSHOT'
 description = 'algs4'
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+java.sourceCompatibility = JavaVersion.VERSION_18
+
+tasks.register('sourcesJar', Jar) {
+    from sourceSets.main.allSource
+    archiveClassifier.set('sources')
+}
 
 publishing {
     publications {
-        maven(MavenPublication) {
-            from(components.java)
+        mavenJava(MavenPublication) {
+            from components.java
+
+            // Group and version for your artifact
+            groupId = 'edu.princeton.cs'
+            artifactId = 'algs4'
+            version = '1.0.5-SNAPSHOT'
+
+            // Include source code in the publication
+            artifact sourcesJar
         }
     }
+
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
