@@ -40,7 +40,6 @@ publishing {
             // Group and version for your artifact
             groupId = 'edu.princeton.cs'
             artifactId = 'algs4'
-            version = '1.0.5-SNAPSHOT'
 
             // Include source code in the publication
             artifact sourcesJar
