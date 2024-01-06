@@ -213,7 +213,8 @@ public class Insertion {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        String[] a = StdIn.readAllStrings();
+        StdOut.print("> ");
+        String[] a = StdIn.readAllStrings(); // S E A R C H E X A M P L E <cmd> D
         Insertion.sort(a);
         show(a);
     }

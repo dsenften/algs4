@@ -1,4 +1,27 @@
-/******************************************************************************
+/*
+ * Copyright 2002-2020, Robert Sedgewick and Kevin Wayne
+ *
+ *  This file is part of algs4, which accompanies the textbook
+ *
+ *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
+ *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
+ *      http://algs4.cs.princeton.edu/
+ *
+ *  algs4 is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version
+ *
+ *  algs4 is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with algs4.  If not, see http://www.gnu.org/licenses.
+ */
+
+/*
  *  Compilation:  javac Graph.java        
  *  Execution:    java Graph input.txt
  *  Dependencies: Bag.java Stack.java In.java StdOut.java
@@ -32,7 +55,7 @@
  *  2: 141 110 108 86 79 51 42 18 14 
  *  ...
  *  
- ******************************************************************************/
+ */
 
 package edu.princeton.cs.algs4;
 
@@ -42,7 +65,7 @@ import java.util.NoSuchElementException;
  *  The {@code Graph} class represents an undirected graph of vertices
  *  named 0 through <em>V</em> – 1.
  *  It supports the following two primary operations: add an edge to the graph,
- *  iterate over all of the vertices adjacent to a vertex. It also provides
+ *  iterate over all the vertices adjacent to a vertex. It also provides
  *  methods for returning the degree of a vertex, the number of vertices
  *  <em>V</em> in the graph, and the number of edges <em>E</em> in the graph.
  *  Parallel edges and self-loops are permitted.
@@ -68,8 +91,9 @@ import java.util.NoSuchElementException;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+@SuppressWarnings("all")
 public class Graph {
-    private static final String NEWLINE = System.getProperty("line.separator");
+    private static final String NEWLINE = System.lineSeparator();
 
     private final int V;
     private int E;
@@ -77,7 +101,6 @@ public class Graph {
     
     /**
      * Initializes an empty graph with {@code V} vertices and 0 edges.
-     * param V the number of vertices
      *
      * @param  V number of vertices
      * @throws IllegalArgumentException if {@code V < 0}
@@ -88,7 +111,7 @@ public class Graph {
         this.E = 0;
         adj = (Bag<Integer>[]) new Bag[V];
         for (int v = 0; v < V; v++) {
-            adj[v] = new Bag<Integer>();
+            adj[v] = new Bag<>();
         }
     }
 
@@ -255,27 +278,3 @@ public class Graph {
     }
 
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

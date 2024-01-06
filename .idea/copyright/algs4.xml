@@ -1,0 +1,6 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="notice" value="Copyright 2002-2020, Robert Sedgewick and Kevin Wayne&#10;&#10; This file is part of algs4, which accompanies the textbook&#10; &#10;     Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,&#10;     Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.&#10;     http://algs4.cs.princeton.edu/&#10;     &#10; algs4 is free software: you can redistribute it and/or modify&#10; it under the terms of the GNU General Public License as published by&#10; the Free Software Foundation, either version 3 of the License, or&#10; (at your option) any later version&#10; &#10; algs4 is distributed in the hope that it will be useful,&#10; but WITHOUT ANY WARRANTY; without even the implied warranty of&#10; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#10; GNU General Public License for more details.&#10; &#10; You should have received a copy of the GNU General Public License&#10; along with algs4.  If not, see http://www.gnu.org/licenses." />
+    <option name="myName" value="algs4" />
+  </copyright>
+</component>
