@@ -21,7 +21,7 @@
  *  along with algs4.  If not, see http://www.gnu.org/licenses.
  */
 
-/******************************************************************************
+/*
  *  Compilation:  javac KMP.java
  *  Execution:    java KMP pattern text
  *  Dependencies: StdOut.java
@@ -68,6 +68,7 @@ package edu.princeton.cs.algs4;
  *  see <a href="https://algs4.cs.princeton.edu/53substring">Section 5.3</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  */
+@SuppressWarnings("DuplicatedCode")
 public class KMP {
     private final int R;       // the radix
     private final int m;       // length of pattern
@@ -164,8 +165,8 @@ public class KMP {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        String pat = args[0];
-        String txt = args[1];
+        String pat = "aabaaaabaab";                         //args[0];
+        String txt = "aaabaabaaaaacaabbaaabaaaabaabaaaaba"; // args[1];
         char[] pattern = pat.toCharArray();
         char[] text    = txt.toCharArray();
 
