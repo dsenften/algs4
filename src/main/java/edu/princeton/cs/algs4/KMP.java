@@ -165,7 +165,7 @@ public class KMP {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        String pat = "aabaaaabaab";                         //args[0];
+        String pat = "aabaaaabaab";                         // args[0];
         String txt = "aaabaabaaaaacaabbaaabaaaabaabaaaaba"; // args[1];
         char[] pattern = pat.toCharArray();
         char[] text    = txt.toCharArray();

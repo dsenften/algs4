@@ -13,8 +13,8 @@ repositories {
     apply plugin: 'idea'
     apply plugin: 'maven-publish'
 
-    sourceCompatibility = 17
-    targetCompatibility = 17
+    sourceCompatibility = 21
+    targetCompatibility = 21
 }
 
 dependencies {
@@ -28,7 +28,7 @@ dependencies {
 }
 
 group = 'edu.princeton.cs'
-version = '1.0.5-SNAPSHOT'
+version = '1.0.6-SNAPSHOT'
 description = 'algs4'
 
 tasks.register('sourcesJar', Jar) {
@@ -65,5 +65,5 @@ test {
 }
 
 wrapper {
-    gradleVersion = '8.4'
+    gradleVersion = '8.10'
 }
