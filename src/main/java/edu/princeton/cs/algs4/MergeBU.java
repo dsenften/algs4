@@ -44,6 +44,7 @@ package edu.princeton.cs.algs4;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+@SuppressWarnings({"java:S4274", "java:S3012", "rawtypes", "ManualArrayCopy"})
 public class MergeBU {
 
     // This class should not be instantiated.
@@ -106,8 +107,8 @@ public class MergeBU {
 
     // print array to standard output
     private static void show(Comparable[] a) {
-        for (int i = 0; i < a.length; i++) {
-            StdOut.println(a[i]);
+        for (Comparable comparable : a) {
+            StdOut.println(comparable);
         }
     }
 
@@ -118,7 +119,7 @@ public class MergeBU {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        String[] a = StdIn.readAllStrings();
+        String[] a = StdIn.readAllStrings(); // M E R G E S O R T E X A M P L E
         MergeBU.sort(a);
         show(a);
     }

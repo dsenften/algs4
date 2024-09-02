@@ -3,7 +3,7 @@
  *  Execution:    java ST < input.txt
  *  Dependencies: StdIn.java StdOut.java
  *  Data files:   https://algs4.cs.princeton.edu/35applications/tinyST.txt
- *  
+ *
  *  Sorted symbol table implementation using a java.util.TreeMap.
  *  Does not allow duplicates.
  *
@@ -11,48 +11,49 @@
 
 package edu.princeton.cs.algs4;
 
+import lombok.NonNull;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
 /**
- *  The {@code ST} class represents an ordered symbol table of generic
- *  key-value pairs.
- *  It supports the usual <em>put</em>, <em>get</em>, <em>contains</em>,
- *  <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
- *  It also provides ordered methods for finding the <em>minimum</em>,
- *  <em>maximum</em>, <em>floor</em>, and <em>ceiling</em>.
- *  It also provides a <em>keys</em> method for iterating over all of the keys.
- *  A symbol table implements the <em>associative array</em> abstraction:
- *  when associating a value with a key that is already in the symbol table,
- *  the convention is to replace the old value with the new value.
- *  Unlike {@link java.util.Map}, this class uses the convention that
- *  values cannot be {@code null}—setting the
- *  value associated with a key to {@code null} is equivalent to deleting the key
- *  from the symbol table.
- *  <p>
- *  It requires that
- *  the key type implements the {@code Comparable} interface and calls the
- *  {@code compareTo()} and method to compare two keys. It does not call either
- *  {@code equals()} or {@code hashCode()}.
- *  <p>
- *  This implementation uses a <em>red-black BST</em>.
- *  The <em>put</em>, <em>get</em>, <em>contains</em>, <em>remove</em>,
- *  <em>minimum</em>, <em>maximum</em>, <em>ceiling</em>, and <em>floor</em>
- *  operations each take &Theta;(log <em>n</em>) time in the worst case,
- *  where <em>n</em> is the number of key-value pairs in the symbol table.
- *  The <em>size</em> and <em>is-empty</em> operations take &Theta;(1) time.
- *  Construction takes &Theta;(1) time.
- *  <p>
- *  For additional documentation, see
- *  <a href="https://algs4.cs.princeton.edu/35applications">Section 3.5</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code ST} class represents an ordered symbol table of generic
+ * key-value pairs.
+ * It supports the usual <em>put</em>, <em>get</em>, <em>contains</em>,
+ * <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
+ * It also provides ordered methods for finding the <em>minimum</em>,
+ * <em>maximum</em>, <em>floor</em>, and <em>ceiling</em>.
+ * It also provides a <em>keys</em> method for iterating over all the keys.
+ * A symbol table implements the <em>associative array</em> abstraction:
+ * when associating a value with a key that is already in the symbol table,
+ * the convention is to replace the old value with the new value.
+ * Unlike {@link java.util.Map}, this class uses the convention that
+ * values cannot be {@code null}—setting the
+ * value associated with a key to {@code null} is equivalent to deleting the key
+ * from the symbol table.
+ * <p>
+ * It requires that
+ * the key type implements the {@code Comparable} interface and calls the
+ * {@code compareTo()} and method to compare two keys. It does not call either
+ * {@code equals()} or {@code hashCode()}.
+ * <p>
+ * This implementation uses a <em>red-black BST</em>.
+ * The <em>put</em>, <em>get</em>, <em>contains</em>, <em>remove</em>,
+ * <em>minimum</em>, <em>maximum</em>, <em>ceiling</em>, and <em>floor</em>
+ * operations each take &Theta;(log <em>n</em>) time in the worst case,
+ * where <em>n</em> is the number of key-value pairs in the symbol table.
+ * The <em>size</em> and <em>is-empty</em> operations take &Theta;(1) time.
+ * Construction takes &Theta;(1) time.
+ * <p>
+ * For additional documentation, see
+ * <a href="https://algs4.cs.princeton.edu/35applications">Section 3.5</a> of
+ * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
- *
- *  @param <Key> the generic type of keys in this symbol table
- *  @param <Value> the generic type of values in this symbol table
+ * @param <Key>   the generic type of keys in this symbol table
+ * @param <Value> the generic type of values in this symbol table
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
 public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
 
@@ -65,72 +66,85 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
         st = new TreeMap<>();
     }
 
+    /**
+     * Unit tests the {@code ST} data type.
+     *
+     * @param args the command-line arguments
+     */
+    public static void main(String[] args) {
+        ST<String, Integer> st = new ST<>();
+        for (int i = 0; !StdIn.isEmpty(); i++) { // S E A R C H E X A M P L E
+            String key = StdIn.readString();
+            st.put(key, i);
+        }
+        for (String s : st.keys())
+            StdOut.println(s + " " + st.get(s));
+    }
 
     /**
      * Returns the value associated with the given key in this symbol table.
      *
-     * @param  key the key
+     * @param key the key
      * @return the value associated with the given key if the key is in this symbol table;
-     *         {@code null} if the key is not in this symbol table
-     * @throws IllegalArgumentException if {@code key} is {@code null}
+     * {@code null} if the key is not in this symbol table
+     * @throws NullPointerException if {@code key} is {@code null}
      */
-    public Value get(Key key) {
-        if (key == null) throw new IllegalArgumentException("calls get() with null key");
+    public Value get(@NonNull Key key) {
         return st.get(key);
     }
 
     /**
-     * Inserts the specified key-value pair into the symbol table, overwriting the old 
+     * Inserts the specified key-value pair into the symbol table, overwriting the old
      * value with the new value if the symbol table already contains the specified key.
      * Deletes the specified key (and its associated value) from this symbol table
      * if the specified value is {@code null}.
      *
-     * @param  key the key
-     * @param  val the value
-     * @throws IllegalArgumentException if {@code key} is {@code null}
+     * @param key the key
+     * @param val the value
+     * @throws NullPointerException if {@code key} is {@code null}
      */
-    public void put(Key key, Value val) {
-        if (key == null) throw new IllegalArgumentException("calls put() with null key");
-        if (val == null) st.remove(key);
-        else             st.put(key, val);
+    public void put(@NonNull Key key, Value val) {
+        if (val == null) {
+            st.remove(key);
+        }
+        else {
+            st.put(key, val);
+        }
     }
 
     /**
-     * Removes the specified key and its associated value from this symbol table     
+     * Removes the specified key and its associated value from this symbol table
      * (if the key is in this symbol table).
      * This is equivalent to {@code remove()}, but we plan to deprecate {@code delete()}.
      *
-     * @param  key the key
-     * @throws IllegalArgumentException if {@code key} is {@code null}
+     * @param key the key
+     * @throws NullPointerException if {@code key} is {@code null}
      */
-    public void delete(Key key) {
-        if (key == null) throw new IllegalArgumentException("calls delete() with null key");
+    public void delete(@NonNull Key key) {
         st.remove(key);
     }
 
     /**
-     * Removes the specified key and its associated value from this symbol table     
+     * Removes the specified key and its associated value from this symbol table
      * (if the key is in this symbol table).
      * This is equivalent to {@code delete()}, but we plan to deprecate {@code delete()}.
      *
-     * @param  key the key
-     * @throws IllegalArgumentException if {@code key} is {@code null}
+     * @param key the key
+     * @throws NullPointerException if {@code key} is {@code null}
      */
-    public void remove(Key key) {
-        if (key == null) throw new IllegalArgumentException("calls remove() with null key");
+    public void remove(@NonNull Key key) {
         st.remove(key);
     }
 
     /**
      * Returns true if this symbol table contain the given key.
      *
-     * @param  key the key
+     * @param key the key
      * @return {@code true} if this symbol table contains {@code key} and
-     *         {@code false} otherwise
-     * @throws IllegalArgumentException if {@code key} is {@code null}
+     * {@code false} otherwise
+     * @throws NullPointerException if {@code key} is {@code null}
      */
-    public boolean contains(Key key) {
-        if (key == null) throw new IllegalArgumentException("calls contains() with null key");
+    public boolean contains(@NonNull Key key) {
         return st.containsKey(key);
     }
 
@@ -155,7 +169,7 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     /**
      * Returns all keys in this symbol table.
      * <p>
-     * To iterate over all of the keys in the symbol table named {@code st},
+     * To iterate over all the keys in the symbol table named {@code st},
      * use the foreach notation: {@code for (Key key : st.keys())}.
      *
      * @return all keys in this symbol table
@@ -165,14 +179,14 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     }
 
     /**
-     * Returns all of the keys in this symbol table.
-     * To iterate over all of the keys in a symbol table named {@code st}, use the
+     * Returns all the keys in this symbol table.
+     * To iterate over all the keys in a symbol table named {@code st}, use the
      * foreach notation: {@code for (Key key : st)}.
      * <p>
      * This method is provided for backward compatibility with the version from
      * <em>Introduction to Programming in Java: An Interdisciplinary Approach.</em>
      *
-     * @return     an iterator to all of the keys in this symbol table
+     * @return an iterator to all the keys in this symbol table
      * @deprecated Replaced by {@link #keys()}.
      */
     @Deprecated
@@ -187,7 +201,9 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
      * @throws NoSuchElementException if this symbol table is empty
      */
     public Key min() {
-        if (isEmpty()) throw new NoSuchElementException("calls min() with empty symbol table");
+        if (isEmpty()) {
+            throw new NoSuchElementException("calls min() with empty symbol table");
+        }
         return st.firstKey();
     }
 
@@ -198,52 +214,41 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
      * @throws NoSuchElementException if this symbol table is empty
      */
     public Key max() {
-        if (isEmpty()) throw new NoSuchElementException("calls max() with empty symbol table");
+        if (isEmpty()) {
+            throw new NoSuchElementException("calls max() with empty symbol table");
+        }
         return st.lastKey();
     }
 
     /**
      * Returns the smallest key in this symbol table greater than or equal to {@code key}.
      *
-     * @param  key the key
+     * @param key the key
      * @return the smallest key in this symbol table greater than or equal to {@code key}
-     * @throws NoSuchElementException if there is no such key
-     * @throws IllegalArgumentException if {@code key} is {@code null}
+     * @throws NoSuchElementException   if there is no such key
+     * @throws NullPointerException if {@code key} is {@code null}
      */
-    public Key ceiling(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to ceiling() is null");
+    public Key ceiling(@NonNull Key key) {
         Key k = st.ceilingKey(key);
-        if (k == null) throw new NoSuchElementException("argument to ceiling() is too large");
+        if (k == null) {
+            throw new NoSuchElementException("argument to ceiling() is too large");
+        }
         return k;
     }
 
     /**
      * Returns the largest key in this symbol table less than or equal to {@code key}.
      *
-     * @param  key the key
+     * @param key the key
      * @return the largest key in this symbol table less than or equal to {@code key}
-     * @throws NoSuchElementException if there is no such key
-     * @throws IllegalArgumentException if {@code key} is {@code null}
+     * @throws NoSuchElementException   if there is no such key
+     * @throws NullPointerException if {@code key} is {@code null}
      */
-    public Key floor(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to floor() is null");
+    public Key floor(@NonNull Key key) {
         Key k = st.floorKey(key);
-        if (k == null) throw new NoSuchElementException("argument to floor() is too small");
-        return k;
-    }
-
-    /**
-     * Unit tests the {@code ST} data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-        ST<String, Integer> st = new ST<>();
-        for (int i = 0; !StdIn.isEmpty(); i++) {
-            String key = StdIn.readString();
-            st.put(key, i);
+        if (k == null) {
+            throw new NoSuchElementException("argument to floor() is too small");
         }
-        for (String s : st.keys())
-            StdOut.println(s + " " + st.get(s));
+        return k;
     }
 }

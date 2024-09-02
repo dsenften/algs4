@@ -130,7 +130,7 @@ import java.util.regex.Pattern;
  *  <p>
  *  <b>Reading a sequence of values of the same type from standard input.</b>
  *  You can use the following methods to read a sequence numbers, strings,
- *  or booleans (all of the same type) from standard input:
+ *  or booleans (all the same type) from standard input:
  *  <ul>
  *  <li> {@link #readAllDoubles()}
  *  <li> {@link #readAllInts()}
@@ -210,6 +210,7 @@ import java.util.regex.Pattern;
  *  @author Kevin Wayne
  *  @author David Pritchard
  */
+@SuppressWarnings("all")
 public final class StdIn {
 
     /*** begin: section (1 of 2) of code duplicated from In to StdIn. */
@@ -243,7 +244,7 @@ public final class StdIn {
    /**
      * Returns true if standard input is empty (except possibly for whitespace).
      * Use this method to know whether the next call to {@link #readString()}, 
-     * {@link #readDouble()}, etc will succeed.
+     * {@link #readDouble()}, etc. will succeed.
      *
      * @return {@code true} if standard input is empty (except possibly
      *         for whitespace); {@code false} otherwise
@@ -522,7 +523,7 @@ public final class StdIn {
         // we could use readAll.trim().split(), but that's not consistent
         // because trim() uses characters 0x00..0x20 as whitespace
         String[] tokens = WHITESPACE_PATTERN.split(readAll());
-        if (tokens.length == 0 || tokens[0].length() > 0)
+        if (tokens.length == 0 || !tokens[0].isEmpty())
             return tokens;
 
         // don't include first token if it is leading whitespace
@@ -537,7 +538,7 @@ public final class StdIn {
      * @return all remaining lines on standard input, as an array of strings
      */
     public static String[] readAllLines() {
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> lines = new ArrayList<>();
         while (hasNextLine()) {
             lines.add(readLine());
         }

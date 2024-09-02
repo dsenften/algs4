@@ -51,6 +51,7 @@ import java.util.NoSuchElementException;
  *  @param <Key> the generic type of key on this priority queue
  */
 
+@SuppressWarnings({"DuplicatedCode", "unchecked", "ManualArrayCopy"})
 public class MaxPQ<Key> implements Iterable<Key> {
     private Key[] pq;                    // store items at indices 1 to n
     private int n;                       // number of items on priority queue
@@ -135,7 +136,7 @@ public class MaxPQ<Key> implements Iterable<Key> {
     /**
      * Returns a largest key on this priority queue.
      *
-     * @return a largest key on this priority queue
+     * @return largest key on this priority queue
      * @throws NoSuchElementException if this priority queue is empty
      */
     public Key max() {
@@ -173,7 +174,7 @@ public class MaxPQ<Key> implements Iterable<Key> {
     /**
      * Removes and returns a largest key on this priority queue.
      *
-     * @return a largest key on this priority queue
+     * @return largest key on this priority queue
      * @throws NoSuchElementException if this priority queue is empty
      */
     public Key delMax() {
@@ -239,7 +240,7 @@ public class MaxPQ<Key> implements Iterable<Key> {
         return isMaxHeapOrdered(1);
     }
 
-    // is subtree of pq[1..n] rooted at k a max heap?
+    // is subtree of pq[1…n] rooted at k a max heap?
     private boolean isMaxHeapOrdered(int k) {
         if (k > n) return true;
         int left = 2*k;
