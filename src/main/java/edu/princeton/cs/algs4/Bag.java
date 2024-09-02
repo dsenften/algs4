@@ -1,4 +1,27 @@
 /*
+ * Copyright 2002-2020, Robert Sedgewick and Kevin Wayne
+ *
+ *  This file is part of algs4, which accompanies the textbook
+ *
+ *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
+ *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
+ *      http://algs4.cs.princeton.edu/
+ *
+ *  algs4 is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version
+ *
+ *  algs4 is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with algs4.  If not, see http://www.gnu.org/licenses.
+ */
+
+/*
  *  Compilation:  javac Bag.java
  *  Execution:    java Bag < input.txt
  *  Dependencies: StdIn.java StdOut.java
@@ -25,7 +48,7 @@
  *  be
  *  to
  *
- ******************************************************************************/
+ */
 
 package edu.princeton.cs.algs4;
 
@@ -50,7 +73,7 @@ import java.util.NoSuchElementException;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  *
- *  @param <Item> the generic type of an item in this bag
+ *  @param <Item> the generic type of item in this bag
  */
 public class Bag<Item> implements Iterable<Item> {
     private Node<Item> first;    // beginning of bag
@@ -96,7 +119,7 @@ public class Bag<Item> implements Iterable<Item> {
      */
     public void add(Item item) {
         Node<Item> oldfirst = first;
-        first = new Node<Item>();
+        first = new Node<>();
         first.item = item;
         first.next = oldfirst;
         n++;
@@ -137,7 +160,7 @@ public class Bag<Item> implements Iterable<Item> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        Bag<String> bag = new Bag<String>();
+        Bag<String> bag = new Bag<>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
             bag.add(item);

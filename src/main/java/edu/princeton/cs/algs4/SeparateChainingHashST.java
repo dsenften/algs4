@@ -15,7 +15,7 @@ package edu.princeton.cs.algs4;
  *  key-value pairs.
  *  It supports the usual <em>put</em>, <em>get</em>, <em>contains</em>,
  *  <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
- *  It also provides a <em>keys</em> method for iterating over all of the keys.
+ *  It also provides a <em>keys</em> method for iterating over all the keys.
  *  A symbol table implements the <em>associative array</em> abstraction:
  *  when associating a value with a key that is already in the symbol table,
  *  the convention is to replace the old value with the new value.
@@ -40,6 +40,7 @@ package edu.princeton.cs.algs4;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+@SuppressWarnings("unused")
 public class SeparateChainingHashST<Key, Value> {
     private static final int INIT_CAPACITY = 4;
 
@@ -61,15 +62,16 @@ public class SeparateChainingHashST<Key, Value> {
      */
     public SeparateChainingHashST(int m) {
         this.m = m;
+        //noinspection unchecked
         st = (SequentialSearchST<Key, Value>[]) new SequentialSearchST[m];
         for (int i = 0; i < m; i++)
-            st[i] = new SequentialSearchST<Key, Value>();
+            st[i] = new SequentialSearchST<>();
     } 
 
     // resize the hash table to have the given number of chains,
-    // rehashing all of the keys
+    // rehashing all the keys
     private void resize(int chains) {
-        SeparateChainingHashST<Key, Value> temp = new SeparateChainingHashST<Key, Value>(chains);
+        SeparateChainingHashST<Key, Value> temp = new SeparateChainingHashST<>(chains);
         for (int i = 0; i < m; i++) {
             for (Key key : st[i].keys()) {
                 temp.put(key, st[i].get(key));
@@ -184,7 +186,7 @@ public class SeparateChainingHashST<Key, Value> {
 
     // return keys in symbol table as an Iterable
     public Iterable<Key> keys() {
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         for (int i = 0; i < m; i++) {
             for (Key key : st[i].keys())
                 queue.enqueue(key);
@@ -199,7 +201,7 @@ public class SeparateChainingHashST<Key, Value> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) { 
-        SeparateChainingHashST<String, Integer> st = new SeparateChainingHashST<String, Integer>();
+        SeparateChainingHashST<String, Integer> st = new SeparateChainingHashST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);

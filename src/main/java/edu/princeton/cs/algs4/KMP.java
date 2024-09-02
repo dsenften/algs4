@@ -1,4 +1,27 @@
-/******************************************************************************
+/*
+ * Copyright 2002-2020, Robert Sedgewick and Kevin Wayne
+ *
+ *  This file is part of algs4, which accompanies the textbook
+ *
+ *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
+ *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
+ *      http://algs4.cs.princeton.edu/
+ *
+ *  algs4 is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version
+ *
+ *  algs4 is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with algs4.  If not, see http://www.gnu.org/licenses.
+ */
+
+/*
  *  Compilation:  javac KMP.java
  *  Execution:    java KMP pattern text
  *  Dependencies: StdOut.java
@@ -45,6 +68,7 @@ package edu.princeton.cs.algs4;
  *  see <a href="https://algs4.cs.princeton.edu/53substring">Section 5.3</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  */
+@SuppressWarnings("DuplicatedCode")
 public class KMP {
     private final int R;       // the radix
     private final int m;       // length of pattern
@@ -141,8 +165,8 @@ public class KMP {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        String pat = args[0];
-        String txt = args[1];
+        String pat = "aabaaaabaab";                         // args[0];
+        String txt = "aaabaabaaaaacaabbaaabaaaabaabaaaaba"; // args[1];
         char[] pattern = pat.toCharArray();
         char[] text    = txt.toCharArray();
 
@@ -166,27 +190,3 @@ public class KMP {
         StdOut.println(pat);
     }
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*
  *  Compilation:  javac Heap.java
  *  Execution:    java Heap < input.txt
  *  Dependencies: StdOut.java StdIn.java
@@ -51,7 +51,7 @@ public class Heap {
      * Rearranges the array in ascending order, using the natural order.
      * @param pq the array to be sorted
      */
-    public static void sort(Comparable[] pq) {
+    public static <T> void sort(Comparable<T>[] pq) {
         int n = pq.length;
 
         // heapify phase
@@ -70,7 +70,7 @@ public class Heap {
     * Helper functions to restore the heap invariant.
     ***************************************************************************/
 
-    private static void sink(Comparable[] pq, int k, int n) {
+    private static <T> void sink(Comparable<T>[] pq, int k, int n) {
         while (2*k <= n) {
             int j = 2*k;
             if (j < n && less(pq, j, j+1)) j++;
@@ -84,8 +84,9 @@ public class Heap {
     * Helper functions for comparisons and swaps.
     * Indices are "off-by-one" to support 1-based indexing.
     ***************************************************************************/
-    private static boolean less(Comparable[] pq, int i, int j) {
-        return pq[i-1].compareTo(pq[j-1]) < 0;
+    @SuppressWarnings("unchecked")
+    private static <T> boolean less(Comparable<T>[] pq, int i, int j) {
+        return pq[i-1].compareTo((T) pq[j-1]) < 0;
     }
 
     private static void exch(Object[] pq, int i, int j) {
@@ -95,9 +96,9 @@ public class Heap {
     }
 
     // print array to standard output
-    private static void show(Comparable[] a) {
-        for (int i = 0; i < a.length; i++) {
-            StdOut.println(a[i]);
+    private static <T> void show(Comparable<T> [] a) {
+        for (Comparable<T> tComparable : a) {
+            StdOut.println(tComparable);
         }
     }
 
@@ -114,7 +115,7 @@ public class Heap {
     }
 }
 
-/******************************************************************************
+/*
  *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
